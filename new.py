@@ -1,4 +1,3 @@
-import glob
 import torch
 import numpy as np
 import torchvision.transforms as transforms
@@ -27,18 +26,16 @@ def connect_to_milvus() :
     user         = 'ibmlhadmin'
     key          = 'password'
     server_pem_path = 'presto.crt'
-    
-    connections.connect(alias='default',
-                       host=host,
-                       port=port,
+    uri="http://" +  host + ":" + str(port) 
+
+    client = MilvusClient(
+                       uri=uri, 
                        user=user,
                        password=key,
                        server_pem_path=server_pem_path,
                        server_name='watsonxdata',
                        secure=True)  
-    
-    print(f"\nList connections:")
-    print(connections.list_connections())
+    return client
 
 def create_collection():
     
@@ -46,7 +43,6 @@ def create_collection():
     
     fields = [
         FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-        FieldSchema(name="file_path", dtype=DataType.VARCHAR, max_length=128),
         FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=1000)       
     ]
     schema = CollectionSchema(fields, "Embedding of FITS image file")
@@ -85,6 +81,7 @@ def generate_embedding(image) :
     # Convert the image to a tensor
     preprocess = transforms.Compose([
         transforms.ToPILImage(),
+        #transforms.Resize((224, 224)),
         transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
@@ -100,70 +97,19 @@ def generate_embedding(image) :
     return embedding.squeeze().numpy().astype(np.float32)
     
 
-def insert_embedding(fits_coll, file_path, embedding):
-    fits_coll.insert([[file_path], [embedding]])
+def insert_embedding(fits_coll, embedding):
+    fits_coll.insert([[embedding]])
     fits_coll.load()
 
-def display_collection(fits_coll):
-    print(f"Collection name: {fits_coll.name}")
-    print(f"Collection description: {fits_coll.description}")
-    print("Fields:")
-    for field in fits_coll.schema.fields:
-        print(f" - Field name: {field.name}, Data type: {field.dtype}, Is primary: {field.is_primary}")
-    # Get and print the number of entities in the collection
-    print(f"Number of entities: {fits_coll.num_entities}")
-    # Search the collection (optional, example to retrieve data)
-    results = fits_coll.query(expr="id >= 0", output_fields=["id", "file_path", "embedding"], limit=5)
-    for result in results:
-        print(result)
+client = connect_to_milvus()
 
-def search_image(search_collection, image_file) :
+# client.list_users()
 
-    image_data = load_fits_file(image_file)
+client.close()
 
-    embedding_vector = generate_embedding(image_data)
+exit()
 
-    query_embedding = [embedding_vector]
-    search_params = {"metric_type": "L2", "params": {"nprobe": 100}}
-    # search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
-    search_collection.load()
-    results = search_collection.search(
-        data=query_embedding,
-        anns_field="embedding",
-        param=search_params,
-        limit=5,
-        output_fields=["id", "file_path"],  
-        expr=None
-    )
-
-    for result in results[0]:
-        print(f"Image ID: {result.id}, Image File: {result.file_path}, Distance: {result.distance}")
-
-
-def initialize_collection():
-    fits_coll = create_collection()
-    file_paths = glob.glob("m31*.FITS")
-    for image_file in sorted(file_paths):
-        print("Inserting file: ", image_file)
-        image_data = load_fits_file(image_file)
-        embedding_vector = generate_embedding(image_data)
-        insert_embedding(fits_coll, image_file, embedding_vector)
-    return fits_coll
-
-
-def search_collection(fits_coll) :
-    file_paths = glob.glob("m31*.FITS")
-    for image_file in sorted(file_paths):
-        print("Searching file:", image_file)
-        search_image(fits_coll, image_file) 
-
-#----------------------------#
-
-connect_to_milvus()
-
-# fits_coll = initialize_collection()
-# display_collection(fits_coll)
-fits_coll = Collection("image_embeddings")
-search_collection(fits_coll)
-
-connections.disconnect(alias="default")
+fits_coll = create_collection(client)
+image_data = load_fits_file("m31.fits")
+embedding_vector = generate_embedding(image_data)
+insert_embedding(fits_coll, embedding_vector)
