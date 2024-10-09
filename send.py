@@ -48,11 +48,11 @@ def create_kafka_producer():
     return Producer(conf)
 
 # Function to send FITS image to Kafka using `produce()`
-def send_fits_image_to_kafka(producer, topic, image_base64):
+def send_fits_image_to_kafka(producer, topic, file, image_base64):
     event = {
         'image_format': 'FITS',
-        'image_data': image_base64,
-        'description': 'Small FITS image'
+        'file': file,
+        'image_data': image_base64        
     }
     # Convert the event to JSON and produce it to the Kafka topic
     producer.produce(topic, key="fits_image", value=json.dumps(event), callback=delivery_report)
@@ -80,6 +80,6 @@ if __name__ == '__main__':
     producer = create_kafka_producer()
 
     # Step 4: Send the image using `produce()`
-    send_fits_image_to_kafka(producer, topic, image_base64)
+    send_fits_image_to_kafka(producer, topic, fits_image_path, image_base64)
 
     print(f'FITS image sent to Kafka topic "{topic}".')
