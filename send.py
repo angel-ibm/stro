@@ -39,7 +39,7 @@ def read_fits_image_as_base64(fits_file_path):
 # Kafka Producer configuration
 def create_kafka_producer():
     return KafkaProducer(
-        bootstrap_servers='localhost:9092',  # Adjust to your Kafka broker address
+        bootstrap_servers='watsonxdata:29092',  # Adjust to your Kafka broker address
         value_serializer=lambda v: json.dumps(v).encode('utf-8')  # Serialize messages as JSON
     )
 
