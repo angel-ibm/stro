@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from kafka import KafkaProducer
 from kafka.admin import KafkaAdminClient, NewTopic
 from astropy.io import fits
