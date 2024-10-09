@@ -1,1 +1,1 @@
-pip install kafka-python astropy
+pip install confluent-kafka astropy

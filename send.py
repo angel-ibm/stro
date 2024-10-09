@@ -1,29 +1,30 @@
-#!/usr/bin/python
-
-from kafka import KafkaProducer
-from kafka.admin import KafkaAdminClient, NewTopic
+from confluent_kafka import Producer, KafkaError
+from confluent_kafka.admin import AdminClient, NewTopic
 from astropy.io import fits
 import json
 import base64
 
+# Kafka configuration
+BROKER = 'watsonxdata:29092'  # Adjust to your Kafka broker address
+
 # Function to create a Kafka topic if it doesn't exist
 def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
-    admin_client = KafkaAdminClient(
-        bootstrap_servers='watsonxdata:29092',  # Adjust to your Kafka broker address
-        client_id='fits_image_producer'
-    )
+    admin_client = AdminClient({'bootstrap.servers': BROKER})
     
-    topic_list = [NewTopic(name=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
+    topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
     
     # Check if the topic already exists before creating it
-    existing_topics = admin_client.list_topics()
+    existing_topics = admin_client.list_topics(timeout=10).topics
     if topic_name not in existing_topics:
-        admin_client.create_topics(new_topics=topic_list, validate_only=False)
-        print(f"Created Kafka topic: {topic_name}")
+        fs = admin_client.create_topics(new_topics=topic_list)
+        for topic, f in fs.items():
+            try:
+                f.result()  # Ensure the topic creation succeeded
+                print(f"Created Kafka topic: {topic}")
+            except Exception as e:
+                print(f"Failed to create topic {topic}: {e}")
     else:
         print(f"Kafka topic {topic_name} already exists.")
-    
-    admin_client.close()
 
 # Function to read a FITS image and convert it to a base64 string
 def read_fits_image_as_base64(fits_file_path):
@@ -38,20 +39,29 @@ def read_fits_image_as_base64(fits_file_path):
 
 # Kafka Producer configuration
 def create_kafka_producer():
-    return KafkaProducer(
-        bootstrap_servers='watsonxdata:29092',  # Adjust to your Kafka broker address
-        value_serializer=lambda v: json.dumps(v).encode('utf-8')  # Serialize messages as JSON
-    )
+    conf = {
+        'bootstrap.servers': BROKER,
+        'client.id': 'fits_image_producer',
+    }
+    return Producer(conf)
 
-# Function to send FITS image to Kafka
+# Function to send FITS image to Kafka using `produce()`
 def send_fits_image_to_kafka(producer, topic, image_base64):
     event = {
         'image_format': 'FITS',
         'image_data': image_base64,
         'description': 'Small FITS image'
     }
-    producer.send(topic, event)
+    # Convert the event to JSON and produce it to the Kafka topic
+    producer.produce(topic, key="fits_image", value=json.dumps(event), callback=delivery_report)
     producer.flush()
+
+# Delivery report callback to check if the message was delivered successfully
+def delivery_report(err, msg):
+    if err is not None:
+        print(f"Message delivery failed: {err}")
+    else:
+        print(f"Message delivered to {msg.topic()} [{msg.partition()}]")
 
 if __name__ == '__main__':
     # Path to the FITS image file
@@ -67,7 +77,7 @@ if __name__ == '__main__':
     # Step 3: Create Kafka producer
     producer = create_kafka_producer()
 
-    # Step 4: Send the image
+    # Step 4: Send the image using `produce()`
     send_fits_image_to_kafka(producer, topic, image_base64)
 
     print(f'FITS image sent to Kafka topic "{topic}".')
