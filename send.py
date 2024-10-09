@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from confluent_kafka import Producer, KafkaError
 from confluent_kafka.admin import AdminClient, NewTopic
 from astropy.io import fits
