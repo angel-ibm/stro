@@ -1,0 +1,10 @@
+{
+    "apikey": "6lgNyL4xcchbTjnQFBTH8AauyLFbBUCFOlejz41hQ873",
+    "endpoints": "https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints",
+    "iam_apikey_description": "Auto-generated for key crn:v1:bluemix:public:cloud-object-storage:global:a/9f8f95eee4714473a87fa319d964063c:0901a11a-4f7c-4011-b7a1-be9e2f6ebe5e:resource-key:e957abc5-92af-48b0-8b58-606bc37c238f",
+    "iam_apikey_id": "ApiKey-ef92cde4-aa19-4a78-ae5b-49b44020bd6d",
+    "iam_apikey_name": "angel-bucket2",
+    "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Writer",
+    "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/9f8f95eee4714473a87fa319d964063c::serviceid:ServiceId-eaa1b098-293d-402b-bff3-f67dbddc86d5",
+    "resource_instance_id": "crn:v1:bluemix:public:cloud-object-storage:global:a/9f8f95eee4714473a87fa319d964063c:0901a11a-4f7c-4011-b7a1-be9e2f6ebe5e::"
+}

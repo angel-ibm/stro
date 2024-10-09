@@ -23,11 +23,12 @@ from torchvision.models import resnet50
 def connect_to_milvus() :
     
     host         = 'eu-de.services.cloud.techzone.ibm.com'
-    port         = 21400
+    port         = 25782
     user         = 'ibmlhadmin'
     key          = 'password'
     server_pem_path = 'presto.crt'
     
+    # This is for Baklarz's image
     connections.connect(alias='default',
                        host=host,
                        port=port,
@@ -36,6 +37,19 @@ def connect_to_milvus() :
                        server_pem_path=server_pem_path,
                        server_name='watsonxdata',
                        secure=True)  
+
+    # This is for SaaS
+    # host         = 'acb3dba1-2c32-4c99-9833-6d060a2e32b4.cqh2jh8d00ae3kp0jmpg.lakehouse.appdomain.cloud'
+    # port         = 30969
+    # user         = 'ibmlhapikey'
+    # key          = 'Xndw8q4VKrLoqM2SB_zwbEuqfyH-9d2zwCyaKFIsEElF'
+    # connections.connect(         
+    #     host=host, 
+    #     port=port,
+    #     user=user,
+    #     password=key,
+    #     secure=True,
+    # )
     
     print(f"\nList connections:")
     print(connections.list_connections())
@@ -161,7 +175,7 @@ def search_collection(fits_coll) :
 
 connect_to_milvus()
 
-# fits_coll = initialize_collection()
+fits_coll = initialize_collection()
 # display_collection(fits_coll)
 fits_coll = Collection("image_embeddings")
 search_collection(fits_coll)
