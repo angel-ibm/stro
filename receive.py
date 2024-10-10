@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from confluent_kafka import Consumer, KafkaError
 import json
 import base64
