@@ -30,16 +30,7 @@ def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
         print(f"Kafka topic {topic_name} already exists.")
 
 # Function to read a FITS image and convert it to a base64 string
-def read_fits_image_as_base64(fits_file_path):
-    with fits.open(fits_file_path) as hdul:
-        # Assuming we are reading the primary HDU (HDU 0) which contains the image data
-        image_data = hdul[0].data
-        image_resized = resize(image_data, (166, 100), mode='reflect')
-        # Convert the image data to bytes (you could also compress it if needed)
-        image_bytes = image_resized.tobytes()
-        # Convert to base64 for sending through Kafka
-        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
-    return image_base64
+
 
 # Kafka Producer configuration
 def create_kafka_producer():
@@ -48,6 +39,16 @@ def create_kafka_producer():
         'client.id': 'fits_image_producer',
     }
     return Producer(conf)
+
+def read_fits_image_as_base64(fits_image_path) :
+
+    with open(fits_image_path, 'rb') as file :
+        file_content = file.read()
+    
+    encoded_file_content = base64.b64encode(file_content).decode('utf-8')
+
+    return encoded_file_content
+
 
 # Function to send FITS image to Kafka using `produce()`
 def send_fits_image_to_kafka(producer, topic, file, image_base64):
@@ -69,7 +70,7 @@ def delivery_report(err, msg):
 
 if __name__ == '__main__':
     # Path to the FITS image file
-    fits_image_path = 'm31.fits'  # Replace with your FITS file path
+    fits_image_path = 'm31dot.fits'  # Replace with your FITS file path
     topic = 'fits-images'  # Kafka topic where images will be sent
 
     # Step 1: Create the Kafka topic
