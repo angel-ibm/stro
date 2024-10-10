@@ -19,15 +19,9 @@ def create_kafka_consumer():
 def save_base64_fits_image(base64_image, output_fits_path):
     # Decode base64 to bytes
     image_bytes = base64.b64decode(base64_image)
-    
-    # Convert bytes back to a numpy array (adjusting the shape as needed)
-    # For example, assuming the image is 100x100 pixels:
-    image_data = np.frombuffer(image_bytes, dtype=np.float32)  # Adjust dtype if needed
-    # image_data = image_data.reshape((166, 100))  # Replace with actual shape of the image
 
-    # Create a FITS file and save it
-    hdu = fits.PrimaryHDU(image_data)
-    hdu.writeto(output_fits_path, overwrite=True)
+    with open(output_fits_path, 'wb') as f:
+        f.write(image_bytes)
 
 if __name__ == '__main__':
     topic = 'fits-images'  # Kafka topic to consume from
