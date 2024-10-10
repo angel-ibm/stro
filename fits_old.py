@@ -61,7 +61,7 @@ def create_collection():
     fields = [
         FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
         FieldSchema(name="file_path", dtype=DataType.VARCHAR, max_length=128),
-        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=16600)       
+        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=1000)       
     ]
     schema = CollectionSchema(fields, "Embedding of FITS image file")
     
@@ -83,18 +83,35 @@ def load_fits_file(file_path) :
     with fits.open(file_path) as hdul:
    
         image_data = hdul[0].data
-        
-        # image_data = (image_data - np.min(image_data)) / (np.max(image_data) - np.min(image_data))
-        image_resized = resize(image_data, (166, 100), mode='reflect')
+        image_data = (image_data - np.min(image_data)) / (np.max(image_data) - np.min(image_data))
+        image_resized = resize(image_data, (224, 224), mode='reflect')
+        if len(image_resized.shape) == 2:  
+            image_resized = np.stack([image_resized] * 3, axis=-1)  
 
     return (image_resized ) 
+    
+def generate_embedding(image) :
 
-def generate_embedding(image_data) : 
+    # Load pre-trained ResNet model
+    model = resnet50()
+    model.eval()  # Set the model to evaluation mode
     
-    embedding = image_data.flatten()
-    embedding = embedding / np.linalg.norm(embedding)  # Normalizing the embedding
+    # Convert the image to a tensor
+    preprocess = transforms.Compose([
+        transforms.ToPILImage(),
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
+    image_tensor = preprocess(image)
+    image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
     
-    return embedding
+    # Generate the embedding (using the model without the classification layer)
+    with torch.no_grad():
+        embedding = model(image_tensor)
+
+    return embedding.squeeze().numpy().astype(np.float32)
     
 
 def insert_embedding(fits_coll, file_path, embedding):
@@ -122,6 +139,7 @@ def search_image(search_collection, image_file) :
 
     query_embedding = [embedding_vector]
     search_params = {"metric_type": "L2", "params": {"nprobe": 100}}
+    # search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
     search_collection.load()
     results = search_collection.search(
         data=query_embedding,
