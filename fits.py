@@ -1,7 +1,5 @@
 import glob
-import torch
 import numpy as np
-import torchvision.transforms as transforms
 
 from pymilvus import(
     Milvus,
@@ -18,7 +16,6 @@ from pymilvus import(
 
 from astropy.io import fits
 from skimage.transform import resize
-from torchvision.models import resnet50
 
 def connect_to_milvus() :
     

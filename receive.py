@@ -23,7 +23,7 @@ def save_base64_fits_image(base64_image, output_fits_path):
     # Convert bytes back to a numpy array (adjusting the shape as needed)
     # For example, assuming the image is 100x100 pixels:
     image_data = np.frombuffer(image_bytes, dtype=np.float32)  # Adjust dtype if needed
-    image_data = image_data.reshape((100, 100))  # Replace with actual shape of the image
+    image_data = image_data.reshape((166, 100))  # Replace with actual shape of the image
 
     # Create a FITS file and save it
     hdu = fits.PrimaryHDU(image_data)

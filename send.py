@@ -3,6 +3,7 @@
 from confluent_kafka import Producer, KafkaError
 from confluent_kafka.admin import AdminClient, NewTopic
 from astropy.io import fits
+from skimage.transform import resize
 import json
 import base64
 
@@ -33,8 +34,9 @@ def read_fits_image_as_base64(fits_file_path):
     with fits.open(fits_file_path) as hdul:
         # Assuming we are reading the primary HDU (HDU 0) which contains the image data
         image_data = hdul[0].data
+        image_resized = resize(image_data, (166, 100), mode='reflect')
         # Convert the image data to bytes (you could also compress it if needed)
-        image_bytes = image_data.tobytes()
+        image_bytes = image_resized.tobytes()
         # Convert to base64 for sending through Kafka
         image_base64 = base64.b64encode(image_bytes).decode('utf-8')
     return image_base64
