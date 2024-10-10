@@ -1,1 +1,1 @@
-pip install confluent-kafka astropy
+pip install confluent-kafka astropy scikit-image
