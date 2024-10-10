@@ -118,19 +118,19 @@ def search_image(search_collection, image_file) :
     embedding_vector = generate_embedding(image_data)
 
     query_embedding = [embedding_vector]
-    search_params = {"metric_type": "L2", "params": {"nprobe": 100}}
+    search_params = {"metric_type": "L2", "params": {"nprobe": 1000}}
     search_collection.load()
     results = search_collection.search(
         data=query_embedding,
         anns_field="embedding",
         param=search_params,
-        limit=5,
+        limit=3,
         output_fields=["id", "file_path"],  
         expr=None
     )
 
     for result in results[0]:
-        print(f"Image ID: {result.id}, Image File: {result.file_path}, Distance: {result.distance}")
+        print(f"Image ID: {result.id}, Image File: {result.file_path}, Difference: {result.distance:.2%}")
 
 
 def initialize_collection():
@@ -145,7 +145,7 @@ def initialize_collection():
 
 
 def search_collection(fits_coll) :
-    file_paths = glob.glob("m31*.FITS")
+    file_paths = glob.glob("m31*.fits")
     for image_file in sorted(file_paths):
         print("Searching file:", image_file)
         search_image(fits_coll, image_file) 
@@ -154,7 +154,7 @@ def search_collection(fits_coll) :
 
 connect_to_milvus()
 
-fits_coll = initialize_collection()
+# fits_coll = initialize_collection()
 # display_collection(fits_coll)
 fits_coll = Collection("image_embeddings")
 search_collection(fits_coll)
