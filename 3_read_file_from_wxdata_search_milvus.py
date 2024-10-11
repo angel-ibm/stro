@@ -134,7 +134,11 @@ def connect_to_watsonxdata() :
 
 def get_image_from_watsonxdata(wxdconnection) :
 
-    sql = 'select json_extract_scalar(_message, \'$.file\') AS "image_data" from FROM "kafka"."default"."fits-images" limit 1 '
+    sql = '''
+    SELECT json_extract_scalar(_message, '$.file') AS "image_data" 
+    FROM "kafka"."default"."fits-images" 
+    LIMIT 1 
+    '''
     try:
         df = pd.read_sql(sql,wxdconnection)
         if (len(df) == 0):
