@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
 import glob
+import prestodb
+from prestodb import transaction
+
 import numpy as np
 
 from pymilvus import(
@@ -97,7 +100,44 @@ def search_collection(fits_coll) :
         print("Searching file:", image_file)
         search_image(fits_coll, image_file) 
 
+def connect_to_watsonxdata() :
+
+    # Connection Parameters
+    userid     = 'ibmlhadmin'
+    password   = 'password'
+    hostname   = 'watsonxdata'
+    port       = '8443'
+    catalog    = 'tpch'
+    schema     = 'tiny'
+    certfile   = "/certs/lh-ssl-ts.crt"
+
+    # Connect Statement
+    try:
+        connection = prestodb.dbapi.connect(
+                host=hostname,
+                port=port,
+                user=userid,
+                catalog=catalog,
+                schema=schema,
+                http_scheme='https',
+                auth=prestodb.auth.BasicAuthentication(userid, password)
+        )
+        if (certfile != None):
+            connection._http_session.verify = certfile
+        cursor = connection.cursor()
+        print("Connection successful")
+    except Exception as e:
+        print("Unable to connect to the database.")
+        print(repr(e))
+
 #----------------------------#
+
+
+connect_to_watsonxdata()
+
+
+
+exit()
 
 connect_to_milvus()
 

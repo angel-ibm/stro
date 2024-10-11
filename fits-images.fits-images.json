@@ -1,0 +1,36 @@
+    {
+        "tableName": "fits-images",
+        "schemaName": "fits-images",
+        "topicName": "fits-images",
+        "key": {
+            "dataFormat": "raw",
+            "fields": [
+                {
+                    "name": "key",
+                    "dataFormat": "LONG",
+                    "type": "BIGINT",
+                    "hidden": "false"
+                }
+            ]
+        },
+        "message": {
+            "dataFormat": "json",
+            "fields": [
+                {
+                    "name": "image_format",
+                    "mapping": "image_format",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "file",
+                    "mapping": "file",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "image_data",
+                    "mapping": "image_data",
+                    "type": "VARCHAR"
+                }
+            ]
+        }
+    }
