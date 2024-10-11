@@ -150,8 +150,8 @@ fits_coll = Collection("image_embeddings")
 
 wxdconnection = connect_to_watsonxdata()
 data_images = get_images_from_watsonxdata(wxdconnection)
-for i in data_images :
-    search_image(fits_coll,i['image_data'])
+for index, row in data_images.iterrows():
+    search_image(fits_coll,row['image_data'])
 
 
 connections.disconnect(alias="default")
