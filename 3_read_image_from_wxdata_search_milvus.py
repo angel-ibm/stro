@@ -1,11 +1,13 @@
 #!/usr/bin/python
 
-import glob
+import base64
 import prestodb
-from prestodb import transaction
 
 import numpy as np
 import pandas as pd
+
+from astropy.io import fits
+from skimage.transform import resize
 
 from pymilvus import(
     Milvus,
@@ -20,8 +22,7 @@ from pymilvus import(
     MilvusClient
 )
 
-from astropy.io import fits
-from skimage.transform import resize
+
 
 def connect_to_milvus() :
 
@@ -75,7 +76,8 @@ def generate_embedding(image_data) :
 
 def search_image(search_collection, image_data) :
 
-    image_resized = resize(image_data, (166, 100), mode='reflect')
+    image_bytes = base64.b64decode(image_data)
+    image_resized = resize(image_bytes, (166, 100), mode='reflect')
     embedding_vector = generate_embedding(image_resized)
     query_embedding = [embedding_vector]
     search_params = {"metric_type": "L2", "params": {"nprobe": 1000}}
