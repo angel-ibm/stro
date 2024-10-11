@@ -143,7 +143,8 @@ def get_image_from_watsonxdata(wxdconnection) :
         print(repr(e))
     
 
-    return image_data
+    return df
+
 
 
 #----------------------------#
@@ -153,6 +154,8 @@ wxdconnection = connect_to_watsonxdata()
 
 
 image_data = get_image_from_watsonxdata(wxdconnection)
+
+print(image_data)
 
 
 
