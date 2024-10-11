@@ -5,6 +5,7 @@ import prestodb
 from prestodb import transaction
 
 import numpy as np
+import pandas as pd
 
 from pymilvus import(
     Milvus,
@@ -113,7 +114,7 @@ def connect_to_watsonxdata() :
 
     # Connect Statement
     try:
-        connection = prestodb.dbapi.connect(
+        wxdconnection = prestodb.dbapi.connect(
                 host=hostname,
                 port=port,
                 user=userid,
@@ -123,17 +124,35 @@ def connect_to_watsonxdata() :
                 auth=prestodb.auth.BasicAuthentication(userid, password)
         )
         if (certfile != None):
-            connection._http_session.verify = certfile
-        cursor = connection.cursor()
+            wxdconnection._http_session.verify = certfile
+        cursor = wxdconnection.cursor()
         print("Connection successful")
+        return wxdconnection
     except Exception as e:
         print("Unable to connect to the database.")
         print(repr(e))
 
+def get_image_from_watsonxdata(wxdconnection) :
+
+    sql = 'select json_extract_scalar(_message, \'$.file\') AS "image_data" from FROM "kafka"."default"."fits-images" limit 1 '
+    try:
+        df = pd.read_sql(sql,wxdconnection)
+        if (len(df) == 0):
+            print("No rows found.")
+    except Exception as e:
+        print(repr(e))
+    
+
+    return image_data
+
+
 #----------------------------#
 
 
-connect_to_watsonxdata()
+wxdconnection = connect_to_watsonxdata()
+
+
+image_data = get_image_from_watsonxdata(wxdconnection)
 
 
 
