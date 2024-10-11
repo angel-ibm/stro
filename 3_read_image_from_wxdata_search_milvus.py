@@ -73,12 +73,10 @@ def generate_embedding(image_data) :
     
     return embedding
 
-def search_image(search_collection, image_file) :
+def search_image(search_collection, image_data) :
 
-    image_data = load_fits_file(image_file)
-
-    embedding_vector = generate_embedding(image_data)
-
+    image_resized = resize(image_data, (166, 100), mode='reflect')
+    embedding_vector = generate_embedding(image_resized)
     query_embedding = [embedding_vector]
     search_params = {"metric_type": "L2", "params": {"nprobe": 1000}}
     search_collection.load()
@@ -94,12 +92,6 @@ def search_image(search_collection, image_file) :
     for result in results[0]:
         print(f"Image ID: {result.id}, Image File: {result.file_path}, Difference: {result.distance:.2%}")
 
-
-def search_collection(fits_coll) :
-    file_paths = glob.glob("m31*.fits")
-    for image_file in sorted(file_paths):
-        print("Searching file:", image_file)
-        search_image(fits_coll, image_file) 
 
 def connect_to_watsonxdata() :
 
@@ -132,12 +124,12 @@ def connect_to_watsonxdata() :
         print("Unable to connect to the database.")
         print(repr(e))
 
-def get_image_from_watsonxdata(wxdconnection) :
+def get_images_from_watsonxdata(wxdconnection) :
 
     sql = '''
-    SELECT json_extract_scalar(_message, '$.file') AS "image_data" 
+    SELECT json_extract_scalar(_message, '$.image_data') AS "image_data" 
     FROM "kafka"."default"."fits-images" 
-    LIMIT 1 
+    LIMIT 100 
     '''
     try:
         df = pd.read_sql(sql,wxdconnection)
@@ -146,7 +138,6 @@ def get_image_from_watsonxdata(wxdconnection) :
     except Exception as e:
         print(repr(e))
     
-
     return df
 
 
@@ -154,20 +145,13 @@ def get_image_from_watsonxdata(wxdconnection) :
 #----------------------------#
 
 
-wxdconnection = connect_to_watsonxdata()
-
-
-image_data = get_image_from_watsonxdata(wxdconnection)
-
-print(image_data)
-
-
-
-exit()
-
 connect_to_milvus()
-
 fits_coll = Collection("image_embeddings")
-search_collection(fits_coll)
+
+wxdconnection = connect_to_watsonxdata()
+data_images = get_images_from_watsonxdata(wxdconnection)
+for i in data_images :
+    search_image(fits_coll,i['image_data'])
+
 
 connections.disconnect(alias="default")
