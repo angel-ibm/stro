@@ -100,7 +100,7 @@ def insert_embedding(fits_coll, file_path, embedding):
 
 def initialize_collection():
     fits_coll = create_collection()
-    file_paths = glob.glob("m31*.FITS")
+    file_paths = glob.glob("./images/m31*.FITS")
     for image_file in sorted(file_paths):
         print("Inserting file: ", image_file)
         image_data = load_fits_file(image_file)
@@ -108,18 +108,8 @@ def initialize_collection():
         insert_embedding(fits_coll, image_file, embedding_vector)
     return fits_coll
 
-
-def search_collection(fits_coll) :
-    file_paths = glob.glob("m31*.fits")
-    for image_file in sorted(file_paths):
-        print("Searching file:", image_file)
-        search_image(fits_coll, image_file) 
-
 #----------------------------#
 
 connect_to_milvus()
-
 fits_coll = initialize_collection()
-fits_coll = Collection("image_embeddings")
-
 connections.disconnect(alias="default")
