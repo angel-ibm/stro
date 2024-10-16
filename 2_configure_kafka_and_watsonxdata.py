@@ -106,7 +106,7 @@ fits_schema_file = {
 with open("fits-images.fits-images.json","w") as fd:
     fd.write(json.dumps(fits_schema_file))
 
-print("and then, use the schema file fits-images.fits-images.json to register a topic file in watsonx.data")
+print("and then, use the schema file fits-images.fits-images.json to register a topic file in watsonx.data\n\n")
 
 
 
