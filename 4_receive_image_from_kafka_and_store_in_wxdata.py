@@ -16,7 +16,8 @@ def create_kafka_consumer():
 
 def save_base64_fits_image(base64_image, output_fits_path):
     
-    image_bytes = base64.b64decode(base64_image).decode('utf-8')
+    # image_bytes = base64.b64decode(base64_image).decode('utf-8')
+    image_bytes = base64.b64decode(base64_image)
 
     with open(output_fits_path, 'wb') as f:
         f.write(image_bytes)
@@ -48,12 +49,11 @@ try:
                 break
 
         else:
-            # event = json.loads(msg.value().decode('utf-8'))
-            event = json.loads(msg.value())
+            event = json.loads(msg.value().decode('utf-8'))
             image_format = event.get('image_format')
-            image_base64 = event.get('image_data')
             description = event.get('file')
-
+            image_base64 = event.get('image_data')
+            
             print(f'Received message: {description}, format: {image_format}')
 
             if image_format == 'FITS' and image_base64:
