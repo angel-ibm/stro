@@ -4,6 +4,7 @@ import requests
 import base64
 import subprocess
 import json
+import pandas as pd
 from confluent_kafka.admin import AdminClient, NewTopic
 
 BROKER = 'watsonxdata:29092'
@@ -59,8 +60,72 @@ request = {}
 r = requests.get(f"{host}:{port}{api}{service}", headers=auth_header, verify=certfile)
 print(f"Reason: {r.reason} status: {r.status_code} starting: {r.json()['starting']}")
 
+def restfulSQL(host,port,api,auth_header,certfile,sql):
+    
+    from time import sleep
+
+    service = "/statement"
+    data    = []
+    columns = []
+    error   = False
+    
+    URI = f"{host}:{port}{api}{service}"
+    r = requests.post(URI, headers=auth_header, data=sql, verify=certfile)
+    if (r.ok == False):
+        print(r.reason)
+        return None
+
+    while r.ok == True: 
+        results = r.json()
+        collect = False
+        stats = results.get('stats',None)
+        state = stats['state']
+        print(state)
+        if (state in ["FINISHED","RUNNING"]):
+            collect = True
+        elif (state == "FAILED"):
+            errormsg = results.get('error',None)
+            if (errormsg != None):
+                print(f"Error: {errormsg.get('message')}")
+            error = True
+            break
+        else:
+            collect = False
+    
+        if (collect == True):
+            columns = results.get('columns',None)
+            result  = results.get('data',None)
+            if (result not in [None]):
+                data.append(result)
+    
+        URI = results.get('nextUri',None)
+        if (URI != None):    
+            sleep(.1)
+            r = requests.get(URI, headers=auth_header, verify=certfile)
+        else:
+            break
+
+    if (error == True):
+        return None
+  
+    column_names = []
+    for col in columns:
+        column_names.append(col.get("name"))
+    
+    data_values = []
+    for row in data[0]:
+        data_values.append(row)
+    
+    df = pd.DataFrame(data=data_values, columns=column_names)
+    return df
+
+df = restfulSQL(host,port,api,auth_header,certfile,'select * from "tpch"."tiny"."customer" limit 10')
+
+
+print(df)
 
 exit()
+
 
 service = "/kafka/register-topic"
 
