@@ -78,7 +78,7 @@ payload = {
         "columns" : columns
     }
 
-response = requests.post(f"{host}:{port}{api}{service}", headers=auth_header, data=json.dumps(payload))
+response = requests.post(f"{host}:{port}{api}{service}", headers=auth_header, data=json.dumps(payload),verify=certfile)
         
 try :
     if response.status_code == 200:
