@@ -2,7 +2,7 @@
 
 import subprocess
 import json
-import os
+import time
 
 kafka_compose = '''
 version: '3'
@@ -37,13 +37,13 @@ command = "docker compose -p kafka -f kafka-compose.yaml down"
 result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 print(result.stdout)
 
-os.sleep(5)
+time.sleep(5)
 
 command = "docker compose -p kafka -f kafka-compose.yaml up --detach"
 result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 print(result.stdout)
 
-os.sleep(5)
+time.sleep(5)
 
 command = "python3 -m pip install confluent-kafka"
 result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
