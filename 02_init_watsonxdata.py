@@ -82,9 +82,11 @@ def create_staging_table(wxdconnection) :
     except Exception as err:
         print(repr(err))
 
-def insert_file(wxdconnection, image_file) :
+    cursor.close()
 
-    with open(image_file, 'rb') as file :
+def insert_file(wxdconnection, image_file):
+    
+    with open(image_file, 'rb') as file:
         file_content = file.read()
 
     encoded_file_content = base64.b64encode(file_content).decode('utf-8')
@@ -92,14 +94,17 @@ def insert_file(wxdconnection, image_file) :
     cursor = wxdconnection.cursor()
 
     sql = '''
-        INSERT INTO 
-            iceberg_data.fits."fits-images" (filename, filebytes)
-            values (%s, %s) 
-    '''
+        INSERT INTO iceberg_data.fits."fits-images" (filename, filebytes)
+        VALUES (%s, %s)
+    '''  
+
     try:
         cursor.execute(sql, (image_file, encoded_file_content))
+        wxdconnection.commit() 
     except Exception as err:
-        print(repr(err))
+        print(f"Error executing SQL: {repr(err)}")
+    finally:
+        cursor.close()  
 
 #----------------------------#
 
