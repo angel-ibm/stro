@@ -23,7 +23,6 @@ from pymilvus import(
 )
 
 
-
 def connect_to_milvus() :
 
     # This is for Baklarz's image
