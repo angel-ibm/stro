@@ -185,7 +185,7 @@ try:
             file = event.get('file')
             image_base64 = event.get('image_data')
             
-            print(f'Received message: {description}, format: {image_format}')
+            print(f'Received message: {file}, format: {image_format}')
 
             if image_format == 'FITS' and image_base64:
                 # Save the image to a FITS file
