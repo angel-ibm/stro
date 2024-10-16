@@ -60,6 +60,41 @@ request = {}
 r = requests.get(f"{host}:{port}{api}{service}", headers=auth_header, verify=certfile)
 print(f"Reason: {r.reason} status: {r.status_code} starting: {r.json()['starting']}")
 
+
+service = "/kafka/register-topic"
+
+columns = [
+        {"name": "event_id", "type": "VARCHAR"},
+        {"name": "event_name", "type": "VARCHAR"},
+        {"name": "event_time", "type": "TIMESTAMP"}
+]
+payload = {
+        "topic_name": topic_name,
+        "kafka_broker_url": BROKER,
+        "schema_name": schema_name,
+        "table_name": table_name,
+        "partitions": num_partitions,
+        "replication_factor": replication_factor,
+        "columns" : columns
+    }
+
+response = requests.post(f"{host}:{port}{api}{service}", headers=auth_header, data=json.dumps(payload))
+        
+try :
+    if response.status_code == 200:
+        print(f"Kafka topic '{topic_name}' registered successfully!")
+    else:
+        print(f"Failed to register Kafka topic. Status Code: {response.status_code}")
+        print(f"Response: {response.text}")
+
+except Exception as e:
+    print(f"Error while registering Kafka topic: {str(e)}")
+
+
+
+exit()
+
+
 def restfulSQL(host,port,api,auth_header,certfile,sql):
     
     from time import sleep
@@ -123,35 +158,3 @@ df = restfulSQL(host,port,api,auth_header,certfile,'select * from "tpch"."tiny".
 
 
 print(df)
-
-exit()
-
-
-service = "/kafka/register-topic"
-
-columns = [
-        {"name": "event_id", "type": "VARCHAR"},
-        {"name": "event_name", "type": "VARCHAR"},
-        {"name": "event_time", "type": "TIMESTAMP"}
-]
-payload = {
-        "topic_name": topic_name,
-        "kafka_broker_url": BROKER,
-        "schema_name": schema_name,
-        "table_name": table_name,
-        "partitions": num_partitions,
-        "replication_factor": replication_factor,
-        "columns" : columns
-    }
-
-response = requests.post(f"{host}:{port}{api}{service}", headers=auth_header, data=json.dumps(payload))
-        
-try :
-    if response.status_code == 200:
-        print(f"Kafka topic '{topic_name}' registered successfully!")
-    else:
-        print(f"Failed to register Kafka topic. Status Code: {response.status_code}")
-        print(f"Response: {response.text}")
-
-except Exception as e:
-    print(f"Error while registering Kafka topic: {str(e)}")
