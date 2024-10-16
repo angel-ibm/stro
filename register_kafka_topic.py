@@ -35,6 +35,4 @@ auth_header = {
 service = "/info"
 request = {}
 r = requests.get(f"{host}:{port}{api}{service}", headers=auth_header, verify=certfile)
-r.reason
-r.status_code
-r.json()['starting']
+print(f"Reason: {r.reason} status: {r.status_code} starting: {r.json()['starting']}")
