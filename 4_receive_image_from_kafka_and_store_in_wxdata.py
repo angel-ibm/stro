@@ -82,7 +82,7 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     #     print(repr(err))
     
     sql = '''
-        create table iceberg_data.angel."fits-images-from-file" (     
+        create table iceberg_data.angel."fits-images-from-message" (     
             "image_format" varchar,
             "file" varchar,
             "image_data" varchar
@@ -96,7 +96,7 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
 
     # I know this is a crime
     sql = f'''
-        INSERT INTO iceberg_data.fits."fits-images" (image_format, file, image_data)
+        INSERT INTO iceberg_data.fits."fits-images-from-message" (image_format, file, image_data)
         VALUES ( '{image_format}', '{file}','{image_base64}' )
     '''  
     try:
