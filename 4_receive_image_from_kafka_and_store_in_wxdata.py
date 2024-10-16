@@ -90,13 +90,14 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     '''
     try:
         cursor.execute(sql)
+        cursor.commit()
     except Exception as err:
         print(repr(err))
 
 
     # I know this is a crime
     sql = f'''
-        INSERT INTO iceberg_data.fits."fits-images-from-message" (image_format, file, image_data)
+        INSERT INTO iceberg_data.angel."fits-images-from-message" (image_format, file, image_data)
         VALUES ( '{image_format}', '{file}','{image_base64}' )
     '''  
     try:
