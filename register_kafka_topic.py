@@ -61,6 +61,7 @@ r = requests.get(f"{host}:{port}{api}{service}", headers=auth_header, verify=cer
 print(f"Reason: {r.reason} status: {r.status_code} starting: {r.json()['starting']}")
 
 
+api = "/v2"
 service = "/kafka/register-topic"
 
 columns = [
