@@ -85,7 +85,7 @@ def create_staging_table(wxdconnection) :
     cursor.close()
 
 def insert_file(wxdconnection, image_file):
-    
+
     with open(image_file, 'rb') as file:
         file_content = file.read()
 
@@ -95,7 +95,7 @@ def insert_file(wxdconnection, image_file):
 
     sql = '''
         INSERT INTO iceberg_data.fits."fits-images" (filename, filebytes)
-        VALUES (%s, %s)
+        VALUES ('%s', '%s')
     '''  
 
     try:
