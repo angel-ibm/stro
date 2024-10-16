@@ -65,21 +65,21 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     except Exception as err:
         print(repr(err))
 
-    sql = '''
-        drop schema if exists iceberg_data.angel
-    '''
-    try:
-        cursor.execute(sql)
-    except Exception as err:
-        print(repr(err))
+    # sql = '''
+    #     drop schema if exists iceberg_data.angel
+    # '''
+    # try:
+    #     cursor.execute(sql)
+    # except Exception as err:
+    #     print(repr(err))
 
-    sql = '''
-        CREATE SCHEMA iceberg_data.angel WITH (location = 's3a://iceberg-bucket/angel')
-    '''
-    try:
-        cursor.execute(sql)
-    except Exception as err:
-        print(repr(err))
+    # sql = '''
+    #     CREATE SCHEMA iceberg_data.angel WITH (location = 's3a://iceberg-bucket/angel')
+    # '''
+    # try:
+    #     cursor.execute(sql)
+    # except Exception as err:
+    #     print(repr(err))
     
     sql = '''
         create table iceberg_data.angel."fits-images-from-file" (     
