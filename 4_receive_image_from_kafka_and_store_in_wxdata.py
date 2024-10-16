@@ -90,7 +90,6 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     '''
     try:
         cursor.execute(sql)
-        cursor.commit()
     except Exception as err:
         print(repr(err))
 
@@ -102,12 +101,13 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     '''  
     try:
         cursor.execute(sql)
-        wxdconnection.commit() 
+        wxdconnection.commit()
     except Exception as err:
         print(f"Error executing SQL: {repr(err)}")
     finally:
         cursor.close() 
 
+    print(f'Inserted: {image_format} {file}')
 
 
 # def read_from_kafka_table_into_watsonxdata(wxdconnection) : 
