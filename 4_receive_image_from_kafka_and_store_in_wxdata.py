@@ -16,7 +16,6 @@ def create_kafka_consumer():
 
 def save_base64_fits_image(base64_image, output_fits_path):
     
-    # image_bytes = base64.b64decode(base64_image).decode('utf-8')
     image_bytes = base64.b64decode(base64_image)
 
     with open(output_fits_path, 'wb') as f:
