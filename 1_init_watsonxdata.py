@@ -7,16 +7,6 @@ import glob
 import numpy as np
 import pandas as pd
 
-# def load_fits_file(file_path) :
-    
-#     with fits.open(file_path) as hdul:
-   
-#         image_data = hdul[0].data
-       
-
-#     return (image_resized ) 
-
-
 def connect_to_watsonxdata() :
 
     # Connection Parameters
@@ -93,6 +83,7 @@ def insert_file(wxdconnection, image_file):
 
     cursor = wxdconnection.cursor()
 
+    # I know this is a crime
     sql = f'''
         INSERT INTO iceberg_data.fits."fits-images" (filename, filebytes)
         VALUES ( '{image_file}', '{encoded_file_content}' )
