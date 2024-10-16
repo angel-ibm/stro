@@ -57,23 +57,19 @@ def create_staging_table(wxdconnection) :
         WITH (location = 's3a://iceberg-bucket/hello') 
     '''
 
-
     try:
         cursor.execute(sql)
     except Exception as err:
         print(repr(err))
 
-
-
-    # sql = '''
-    # create table "iceberg_data"."angel"
-    # '''
     
-    # sql = '''
-    # create table "iceberg_data"."angel"."fits-images" (
-    #      filename   VARCHAR,
-    #      filebytes  VARCHAR)
-    # '''
+    sql = '''
+        CREATE TABLE IF NOT EXISTS
+            iceberg_data.hello.fits-images (
+                filename   VARCHAR,
+                filebytes  VARCHAR
+            )
+    '''
 
 #----------------------------#
 
