@@ -95,11 +95,11 @@ def insert_file(wxdconnection, image_file):
 
     sql = '''
         INSERT INTO iceberg_data.fits."fits-images" (filename, filebytes)
-        VALUES ('%s', '%s')
+        VALUES (%s, %s)
     '''  
 
     try:
-        cursor.execute(sql, (image_file, encoded_file_content))
+        cursor.execute(sql, ('uno', 'dos'))
         wxdconnection.commit() 
     except Exception as err:
         print(f"Error executing SQL: {repr(err)}")
