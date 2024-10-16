@@ -48,7 +48,8 @@ try:
                 break
 
         else:
-            event = json.loads(msg.value().decode('utf-8'))
+            # event = json.loads(msg.value().decode('utf-8'))
+            event = json.loads(msg.value())
             image_format = event.get('image_format')
             image_base64 = event.get('image_data')
             description = event.get('file')
