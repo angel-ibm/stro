@@ -63,7 +63,7 @@ def create_staging_table(wxdconnection) :
     
     sql = '''
         DROP TABLE IF EXISTS 
-            iceberg_data.hello.fits-images
+            iceberg_data.hello."fits-images"
     '''
     try:
         cursor.execute(sql)
@@ -72,7 +72,7 @@ def create_staging_table(wxdconnection) :
         
     sql = '''
         CREATE TABLE 
-            iceberg_data.hello.fits-images (
+            iceberg_data.hello."fits-images" (
                 filename   VARCHAR,
                 filebytes  VARCHAR
             )
