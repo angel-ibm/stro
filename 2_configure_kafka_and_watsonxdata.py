@@ -109,21 +109,27 @@ with open("fits-images.fits-images.json","w") as fd:
 print("and then, use the schema file fits-images.fits-images.json to register a topic file in watsonx.data\n\n")
 
 
+sql = '''
+SELECT
+    json_extract_scalar(_message, '$.image_format') AS format,
+    json_extract_scalar(_message, '$.file') AS file
+FROM
+  "kafka"."default"."fits-images"
+LIMIT
+  100;
+'''
 
-# SELECT
-#     json_extract_scalar(_message, '$.image_format') AS format,
-#     json_extract_scalar(_message, '$.file') AS file
-# FROM
-#   "kafka"."default"."fits-images"
-# LIMIT
-#   100;
-
-# create table iceberg_data.angel."fits-images" as
-# (
-#     SELECT
-#         json_extract_scalar(_message, '$.image_format') AS "image_format",
-#         json_extract_scalar(_message, '$.file') AS "file",
-#         json_extract_scalar(_message, '$.image_data') AS "image_data"
-#     FROM
-#         "kafka"."default"."fits-images"
-# )
+sql = '''
+CREATE SCHEMA  iceberg_data.angel WITH (location = 's3a://iceberg-bucket/angel')
+'''
+sql = '''
+create table iceberg_data.angel."fits-images" as
+(
+    SELECT
+        json_extract_scalar(_message, '$.image_format') AS "image_format",
+        json_extract_scalar(_message, '$.file') AS "file",
+        json_extract_scalar(_message, '$.image_data') AS "image_data"
+    FROM
+        "kafka"."default"."fits-images"
+)
+'''

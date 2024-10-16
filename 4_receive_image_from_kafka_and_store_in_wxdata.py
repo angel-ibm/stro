@@ -21,6 +21,83 @@ def save_base64_fits_image(base64_image, output_fits_path):
     with open(output_fits_path, 'wb') as f:
         f.write(image_bytes)
 
+def connect_to_watsonxdata() :
+
+    # Connection Parameters
+    userid     = 'ibmlhadmin'
+    password   = 'password'
+    hostname   = 'watsonxdata'
+    port       = '8443'
+    catalog    = 'tpch'
+    schema     = 'tiny'
+    certfile   = "/certs/lh-ssl-ts.crt"
+
+    # Connect Statement
+    try:
+        wxdconnection = prestodb.dbapi.connect(
+                host=hostname,
+                port=port,
+                user=userid,
+                catalog=catalog,
+                schema=schema,
+                http_scheme='https',
+                auth=prestodb.auth.BasicAuthentication(userid, password)
+        )
+        if (certfile != None):
+            wxdconnection._http_session.verify = certfile
+        print("Connection successful")
+        return wxdconnection
+    except Exception as e:
+        print("Unable to connect to the database.")
+        print(repr(e))
+
+def insert_into_watsonxdata(wxdconnection) : 
+
+    cursor = wxdconnection.cursor()
+    
+    sql = '''
+        drop table if exists iceberg_data.angel."fits-images"
+    '''
+    try:
+        cursor.execute(sql)
+    except Exception as err:
+        print(repr(err))
+
+    sql = '''
+        drop schema if exists iceberg_data.angel
+    '''
+    try:
+        cursor.execute(sql)
+    except Exception as err:
+        print(repr(err))
+
+    sql = '''
+        CREATE SCHEMA iceberg_data.angel WITH (location = 's3a://iceberg-bucket/angel')
+    '''
+    try:
+        cursor.execute(sql)
+    except Exception as err:
+        print(repr(err))
+
+    sql = '''
+        create table iceberg_data.angel."fits-images" as
+        (
+            SELECT
+                json_extract_scalar(_message, '$.image_format') AS "image_format",
+                json_extract_scalar(_message, '$.file') AS "file",
+                json_extract_scalar(_message, '$.image_data') AS "image_data"
+            FROM
+                "kafka"."default"."fits-images"
+        )
+        '''
+    try:
+        cursor.execute(sql)
+    except Exception as err:
+        print(repr(err))
+
+    sql = '''
+        select * from iceberg_data.angel."fits-images"
+    '''
 #-----------------------------------------------------# 
 
 topic = 'fits-images'  
@@ -57,8 +134,11 @@ try:
 
             if image_format == 'FITS' and image_base64:
                 # Save the image to a FITS file
-                save_base64_fits_image(image_base64, output_fits_path)
-                print(f'FITS image saved to "{output_fits_path}".')
+                # save_base64_fits_image(image_base64, output_fits_path)
+                # print(f'FITS image saved to "{output_fits_path}".')
+
+                wxdconnection = connect_to_watsonxdata()
+                insert_into_watsonxdata(wxdconnection, image_base64)
 
 except KeyboardInterrupt:
     print("Shutting down consumer...")
