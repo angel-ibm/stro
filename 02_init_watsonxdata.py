@@ -53,8 +53,8 @@ def create_staging_table(wxdconnection) :
 
     sql = '''
         CREATE SCHEMA IF NOT EXISTS 
-            iceberg_data.hello 
-        WITH (location = 's3a://iceberg-bucket/hello') 
+            iceberg_data.fits 
+        WITH (location = 's3a://iceberg-bucket/fits') 
     '''
     try:
         cursor.execute(sql)
@@ -63,7 +63,7 @@ def create_staging_table(wxdconnection) :
     
     sql = '''
         DROP TABLE IF EXISTS 
-            iceberg_data.hello."fits-images"
+            iceberg_data.fits."fits-images"
     '''
     try:
         cursor.execute(sql)
@@ -72,7 +72,7 @@ def create_staging_table(wxdconnection) :
         
     sql = '''
         CREATE TABLE 
-            iceberg_data.hello."fits-images" (
+            iceberg_data.fits."fits-images" (
                 filename   VARCHAR,
                 filebytes  VARCHAR
             )
