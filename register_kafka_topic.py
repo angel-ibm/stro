@@ -18,3 +18,23 @@ result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
 presto_password   = result.stdout.strip()
 print(f"Presto user: {presto_userid} Presto password: {presto_password}")
 
+credentials_bytes = f"{presto_userid}:{presto_password}".encode("ascii") 
+credentials       = base64.b64encode(credentials_bytes).decode("ascii")
+print(f"Credentials Base64: {credentials}")
+
+host              = "https://watsonxdata"
+port              = 8443
+api               = "/v1"
+certfile          = "/certs/lh-ssl-ts.crt"
+
+auth_header = {
+    "Content-Type"  : "text/javascript",
+    "Authorization" : f"Basic {credentials}",
+    "X-Presto-User" : presto_userid
+}
+service = "/info"
+request = {}
+r = requests.get(f"{host}:{port}{api}{service}", headers=auth_header, verify=certfile)
+r.reason
+r.status_code
+r.json()['starting']
