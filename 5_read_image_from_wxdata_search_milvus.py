@@ -77,9 +77,9 @@ def search_image(search_collection, image_data) :
 
     print("Image data:", image_data)
 
-    image_bytes = base64.b64decode(image_data).decode('utf-8')
+    image_bytes = base64.b64decode(image_data)
 
-    print("Image decoded:", image_data)
+    print("Image decoded:", image_bytes)
 
     image_resized = resize(image_bytes, (166, 100), mode='reflect')
     embedding_vector = generate_embedding(image_resized)
