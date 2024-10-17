@@ -83,10 +83,10 @@ def search_image(search_collection, kafka_data) :
     fits_file = io.BytesIO(file_contents)
     with fits.open(fits_file) as hdul:
         hdul.info()
-        print("Image dimensions:", image_data.shape)
-        image_data = hdul[0].data      
+        image_data = hdul[0].data
+
     image_resized = resize(image_data, (166, 100), mode='reflect')
-    
+
     embedding_vector = generate_embedding(image_resized)
     query_embedding = [embedding_vector]
     search_params = {"metric_type": "L2", "params": {"nprobe": 1000}}
@@ -161,7 +161,7 @@ fits_coll = Collection("image_embeddings")
 
 wxdconnection = connect_to_watsonxdata()
 data_images = get_images_from_watsonxdata(wxdconnection)
-print (data_images)
+
 for index, row in data_images.iterrows():
     search_image(fits_coll,row['image_data'])
 
