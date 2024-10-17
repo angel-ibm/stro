@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import io
 import base64
 import prestodb
 
@@ -66,22 +67,26 @@ def load_fits_file(file_path) :
 
     return (image_resized ) 
 
+
+
+
 def generate_embedding(image_data) : 
     
     embedding = image_data.flatten()
     embedding = embedding / np.linalg.norm(embedding)  # Normalizing the embedding
     
     return embedding
+    
+def search_image(search_collection, kafka_data) :
 
-def search_image(search_collection, image_data) :
-
-    print("Image data:", image_data)
-
-    image_bytes = base64.b64decode(image_data)
-
-    print("Image decoded:", image_bytes)
-
-    image_resized = resize(image_bytes, (166, 100), mode='reflect')
+    file_contents = base64.b64decode(kafka_data)
+    fits_file = io.BytesIO(file_contents)
+    with fits.open(fits_file) as hdul:
+        hdul.info()
+        print("Image dimensions:", image_data.shape)
+        image_data = hdul[0].data      
+    image_resized = resize(image_data, (166, 100), mode='reflect')
+    
     embedding_vector = generate_embedding(image_resized)
     query_embedding = [embedding_vector]
     search_params = {"metric_type": "L2", "params": {"nprobe": 1000}}
