@@ -75,7 +75,12 @@ def generate_embedding(image_data) :
 
 def search_image(search_collection, image_data) :
 
-    image_bytes = base64.b64decode(image_data)
+    print("Image data:", image_data)
+
+    image_bytes = base64.b64decode(image_data).decode('utf-8')
+
+    print("Image decoded:", image_data)
+
     image_resized = resize(image_bytes, (166, 100), mode='reflect')
     embedding_vector = generate_embedding(image_resized)
     query_embedding = [embedding_vector]
@@ -151,6 +156,7 @@ fits_coll = Collection("image_embeddings")
 
 wxdconnection = connect_to_watsonxdata()
 data_images = get_images_from_watsonxdata(wxdconnection)
+print (data_images)
 for index, row in data_images.iterrows():
     search_image(fits_coll,row['image_data'])
 
