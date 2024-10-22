@@ -21,7 +21,7 @@ def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
         for topic, future in delete_futures.items():
             try:
                 future.result()  
-                print(f"Topic '{topic}' has been successfully deleted.")
+                print(f"Topic '{topic}' has been marked for deletion.")
             except Exception as e:
                 print(f"Failed to delete topic '{topic}': {e}")
 
