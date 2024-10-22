@@ -1,11 +1,13 @@
 #!/usr/bin/python
 
-from confluent_kafka import Consumer, KafkaError
+
 import json
+import time
 import base64
+import prestodb
 import numpy as np
 from astropy.io import fits
-import prestodb
+from confluent_kafka import Consumer, KafkaError
 
 def create_kafka_consumer():
     conf = {
@@ -223,11 +225,14 @@ topic = 'fits-images'
 consumer = create_kafka_consumer()
 consumer.subscribe([topic])
 
-print(f'Waiting for messages on topic "{topic}"...')
 
+duration = 30
+start_time = time.time()
+
+print(f'Waiting "{duration}" seconds for messages on topic "{topic}"...')
 
 try:
-    while True:
+    while time.time() - start_time < duration:
         msg = consumer.poll(1.0)  
 
         if msg is None:
