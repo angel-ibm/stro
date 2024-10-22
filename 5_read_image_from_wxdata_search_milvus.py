@@ -151,8 +151,6 @@ def get_images_from_watsonxdata(wxdconnection) :
     
     return df
 
-
-
 #----------------------------#
 
 

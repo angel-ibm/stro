@@ -17,13 +17,73 @@
             "dataFormat": "json",
             "fields": [
                 {
-                    "name": "image_format",
-                    "mapping": "image_format",
+                    "name": "file",
+                    "mapping": "file",
                     "type": "VARCHAR"
                 },
                 {
-                    "name": "file",
-                    "mapping": "file",
+                    "name": "image_width",
+                    "mapping": "image_width",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "image_height",
+                    "mapping": "image_height",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "image_utz",
+                    "mapping": "image_utz",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "object_name",
+                    "mapping": "object_name",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "object_ra",
+                    "mapping": "object_ra",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "object_dec",
+                    "mapping": "object_dec",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "object_alt",
+                    "mapping": "object_alt",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "object_az",
+                    "mapping": "object_az",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "camera_focus",
+                    "mapping": "camera_focus",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "local_temp",
+                    "mapping": "local_temp",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "local_lat",
+                    "mapping": "local_lat",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "local_long",
+                    "mapping": "local_long",
+                    "type": "VARCHAR"
+                },
+                {
+                    "name": "local_weather",
+                    "mapping": "local_weather",
                     "type": "VARCHAR"
                 },
                 {
