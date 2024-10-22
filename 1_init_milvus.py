@@ -104,8 +104,7 @@ def generate_embedding(image_data) :
     embedding = image_data.flatten()
     embedding = embedding / np.linalg.norm(embedding)  
     
-    return embedding
-    
+    return embedding    
 
 def insert_embedding(fits_coll, file_path, header, embedding):
 
