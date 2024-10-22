@@ -109,19 +109,19 @@ def generate_embedding(image_data) :
 
 def insert_embedding(fits_coll, file_path, header, embedding):
 
-    image_width = header['NAXIS1']
-    image_height = header['NAXIS2']
+    image_width = str(header['NAXIS1'])
+    image_height = str(header['NAXIS2'])
     image_utz = header['UT-OBS']
     object_name = header['OBJECT']
-    object_ra = header['RA']
-    object_dec = header['DEC']
-    object_alt = header['TELALT']
-    object_az = header['TELAZ']
-    camera_focus = header['CAMFOCUS']
-    local_temp = header['TELTEMP']
-    local_lat = header['LATITUDE']
-    local_long = header['LONGITUD']
-    local_weather = header['WEATHER']
+    object_ra = str(header['RA'])
+    object_dec = str(header['DEC'])
+    object_alt =str( header['TELALT'])
+    object_az = str(header['TELAZ'])
+    camera_focus = str(header['CAMFOCUS'])
+    local_temp = str(header['TELTEMP'])
+    local_lat = str(header['LATITUDE'])
+    local_long = str(header['LONGITUD'])
+    local_weather = str(header['WEATHER'])
 
     fits_coll.insert([  [file_path], 
                         [embedding],
