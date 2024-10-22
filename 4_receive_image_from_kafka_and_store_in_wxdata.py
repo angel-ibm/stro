@@ -53,7 +53,23 @@ def connect_to_watsonxdata() :
         print(repr(e))
 
 
-def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
+def insert_into_watsonxdata(wxdconnection,
+                            file,
+                            image_width  ,
+                            image_height ,
+                            image_utz    ,
+                            object_name  ,
+                            object_ra    ,
+                            object_dec   ,
+                            object_alt   ,
+                            object_az    ,
+                            camera_focus ,
+                            local_temp   ,
+                            local_lat    ,
+                            local_long   ,
+                            local_weather,  
+                            image_base64
+                            ) :
 
     cursor = wxdconnection.cursor()
 
@@ -83,9 +99,21 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     
     sql = '''
         create table iceberg_data.angel."fits-images-from-message" (     
-            "image_format" varchar,
-            "file" varchar,
-            "image_data" varchar
+            file VARCHAR,
+            image_width VARCHAR,
+            image_height VARCHAR,
+            image_utz VARCHAR,
+            object_name VARCHAR,
+            object_ra VARCHAR,
+            object_dec VARCHAR,
+            object_alt VARCHAR,
+            object_az VARCHAR,
+            camera_focus VARCHAR,
+            local_temp VARCHAR,
+            local_lat VARCHAR,
+            local_long VARCHAR,
+            local_weather VARCHAR
+            image_data VARCHAR
         )
     '''
     try:
@@ -96,8 +124,41 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
 
     # I know this is a crime
     sql = f'''
-        INSERT INTO iceberg_data.angel."fits-images-from-message" (image_format, file, image_data)
-        VALUES ( '{image_format}', '{file}','{image_base64}' )
+        INSERT INTO iceberg_data.angel."fits-images-from-message"(
+            file, 
+            image_width ,
+            image_height ,
+            image_utz ,
+            object_name ,
+            object_ra ,
+            object_dec ,
+            object_alt ,
+            object_az ,
+            camera_focus ,
+            local_temp ,
+            local_lat ,
+            local_long ,
+            local_weather,
+            image_data
+        )
+        VALUES ( 
+            '{file}',
+            '{image_width}' ,
+            '{image_height} ',
+            '{image_utz}' ,
+            '{object_name}' ,
+            '{object_ra} ',
+            '{object_dec}' ,
+            '{object_alt}' ,
+            '{object_az} ',
+            '{camera_focus}' ,
+            '{local_temp} ',
+            '{local_lat}' ,
+            '{local_long}' ,
+            '{local_weather}',
+            '{image_base64}',                     
+        )
+    
     '''  
     try:
         cursor.execute(sql)
@@ -107,7 +168,7 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
     finally:
         cursor.close() 
 
-    print(f'Inserted: {image_format} {file}')
+    print(f'Inserted: {file}')
 
 
 # def read_from_kafka_table_into_watsonxdata(wxdconnection) : 
@@ -157,8 +218,7 @@ def insert_into_watsonxdata(wxdconnection, image_format, file, image_base64) :
 #-----------------------------------------------------# 
 
 topic = 'fits-images'  
-output_fits_path = 'received_image.fits'  
-
+# output_fits_path = 'received_image.fits'  
 
 consumer = create_kafka_consumer()
 consumer.subscribe([topic])
@@ -182,19 +242,42 @@ try:
 
         else:
             event = json.loads(msg.value().decode('utf-8'))
-            image_format = event.get('image_format')
-            file = event.get('file')
+
+            file         = event.get('file')
+            image_width  = event.get('image_width')
+            image_height = event.get('image_height')
+            image_utz    = event.get('image_utz')
+            object_name  = event.get('object_name')
+            object_ra    = event.get('object_ra')
+            object_dec   = event.get('object_dec')
+            object_alt   = event.get('object_alt')
+            object_az    = event.get('object_az')
+            camera_focus = event.get('camera_focus')
+            local_temp   = event.get('local_temp')
+            local_lat    = event.get('local_lat')
+            local_long   = event.get('local_long')
+            local_weather= event.get('local_weather')
             image_base64 = event.get('image_data')
             
-            print(f'Received message: {file}, format: {image_format}')
+            print(f'Received message: {file}')
 
-            if image_format == 'FITS' and image_base64:
-                # Save the image to a FITS file
-                # save_base64_fits_image(image_base64, output_fits_path)
-                # print(f'FITS image saved to "{output_fits_path}".')
-
-                wxdconnection = connect_to_watsonxdata()
-                insert_into_watsonxdata(wxdconnection, image_format, file, image_base64)
+            wxdconnection = connect_to_watsonxdata()
+            insert_into_watsonxdata(wxdconnection, 
+                                    file,
+                                    image_width  ,
+                                    image_height ,
+                                    image_utz    ,
+                                    object_name  ,
+                                    object_ra    ,
+                                    object_dec   ,
+                                    object_alt   ,
+                                    object_az    ,
+                                    camera_focus ,
+                                    local_temp   ,
+                                    local_lat    ,
+                                    local_long   ,
+                                    local_weather,  
+                                    image_base64)
 
 except KeyboardInterrupt:
     print("Shutting down consumer...")
