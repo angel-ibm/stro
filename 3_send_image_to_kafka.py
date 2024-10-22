@@ -16,16 +16,19 @@ def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
     topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
     
     existing_topics = admin_client.list_topics(timeout=10).topics
-    if topic_name not in existing_topics:
-        fs = admin_client.create_topics(new_topics=topic_list)
-        for topic, f in fs.items():
-            try:
-                f.result()  
-                print(f"Created Kafka topic: {topic}")
-            except Exception as e:
-                print(f"Failed to create topic {topic}: {e}")
-    else:
-        print(f"Kafka topic {topic_name} already exists.")
+    if topic_name in existing_topics:
+        metadata = admin_client.delete_topics([topic_name])
+        for topic, f in metadata.items():
+            print(f"Topic {topic} existed and has been deleted")
+
+    fs = admin_client.create_topics(new_topics=topic_list)
+    for topic, f in fs.items():
+        try:
+            f.result()  
+            print(f"Created Kafka topic: {topic}")
+        except Exception as e:
+            print(f"Failed to create topic {topic}: {e}")
+    
 
 def create_kafka_producer():
     conf = {
