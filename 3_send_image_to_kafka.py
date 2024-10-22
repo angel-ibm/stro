@@ -12,12 +12,17 @@ BROKER = 'watsonxdata:29092'
 def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
 
     admin_client = AdminClient({'bootstrap.servers': BROKER})
-    
+
     existing_topics = admin_client.list_topics(timeout=10).topics
+
     if topic_name in existing_topics:
-        metadata = admin_client.delete_topics([topic_name])
-        for topic, f in metadata.items():
-            print(f"Topic {topic} existed and has been deleted")
+        delete_futures = admin_client.delete_topics([topic_name], operation_timeout=30)
+        for topic, future in delete_futures.items():
+            try:
+                future.result()  
+                print(f"Topic '{topic}' has been successfully deleted.")
+            except Exception as e:
+                print(f"Failed to delete topic '{topic}': {e}")
 
     topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
 
