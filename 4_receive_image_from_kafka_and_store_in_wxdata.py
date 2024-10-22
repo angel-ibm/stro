@@ -114,7 +114,7 @@ def insert_into_watsonxdata(wxdconnection,
             local_temp VARCHAR,
             local_lat VARCHAR,
             local_long VARCHAR,
-            local_weather VARCHAR
+            local_weather VARCHAR,
             image_data VARCHAR
         )
     '''
