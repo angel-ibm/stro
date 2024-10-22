@@ -96,12 +96,12 @@ def search_image(search_collection, kafka_data) :
         anns_field="embedding",
         param=search_params,
         limit=3,
-        output_fields=["id", "file_path"],  
+        output_fields=["file_path"],  
         expr=None
     )
 
     for result in results[0]:
-        print(f"Image ID: {result.id}, Image File: {result.file_path}, Difference: {result.distance:.2%}")
+        print(f"Image File: {result.file_path}, Difference: {result.distance:.2%}")
 
 
 def connect_to_watsonxdata() :
