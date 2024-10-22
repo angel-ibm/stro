@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import json
+import time
 import base64
 
 from astropy.io import fits
@@ -23,6 +24,23 @@ def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
                 print(f"Topic '{topic}' has been successfully deleted.")
             except Exception as e:
                 print(f"Failed to delete topic '{topic}': {e}")
+
+        
+        start_time = time.time()
+        timeout = 10
+        check_interval = 5
+
+        while time.time() - start_time < timeout:
+            
+            metadata = admin_client.list_topics(timeout=timeout)
+            
+            if topic_name not in metadata.topics:
+                print(f"Topic '{topic_name}' has been successfully deleted.")
+                return
+            else:
+                print(f"Topic '{topic_name}' is still being deleted. Checking again in {check_interval} seconds...")
+
+            time.sleep(check_interval)
 
     topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
 
@@ -102,11 +120,10 @@ def delivery_report(err, msg):
 
 topic = 'fits-images'  
 create_kafka_topic(topic)
-producer = create_kafka_producer()
 
+producer = create_kafka_producer()
 file_image_path = './images/m31dot.fits'  
 image_header, image_base64 = read_fits_image_as_base64(file_image_path)
-
 send_file_image_to_kafka(producer, topic, file_image_path, image_base64, image_header)
 
 print(f'File sent to Kafka topic "{topic}".')
