@@ -13,15 +13,16 @@ def create_kafka_topic(topic_name, num_partitions=1, replication_factor=1):
 
     admin_client = AdminClient({'bootstrap.servers': BROKER})
     
-    topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
-    
     existing_topics = admin_client.list_topics(timeout=10).topics
     if topic_name in existing_topics:
         metadata = admin_client.delete_topics([topic_name])
         for topic, f in metadata.items():
             print(f"Topic {topic} existed and has been deleted")
 
+    topic_list = [NewTopic(topic=topic_name, num_partitions=num_partitions, replication_factor=replication_factor)]
+
     fs = admin_client.create_topics(new_topics=topic_list)
+
     for topic, f in fs.items():
         try:
             f.result()  
