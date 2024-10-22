@@ -59,7 +59,21 @@ def create_collection():
     fields = [
         FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
         FieldSchema(name="file_path", dtype=DataType.VARCHAR, max_length=128),
-        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=16600)       
+        FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=16600),
+        FieldSchema(name="image_width", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="image_height", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="image_utz", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="object_name", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="object_ra", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="object_dec", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="object_alt", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="object_az", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="camera_focus", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="local_temp", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="local_lat", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="local_long", dtype=DataType.VARCHAR, max_length=128),
+        FieldSchema(name="local_weather", dtype=DataType.VARCHAR, max_length=128)
+
     ]
     schema = CollectionSchema(fields, "Embedding of FITS image file")
     
@@ -79,11 +93,11 @@ def create_collection():
 def load_fits_file(file_path) :
     
     with fits.open(file_path) as hdul:
-   
+        image_header = hdul[0].header
         image_data = hdul[0].data
         image_resized = resize(image_data, (166, 100), mode='reflect')
 
-    return (image_resized ) 
+    return (image_header, image_resized) 
 
 def generate_embedding(image_data) : 
     
@@ -93,9 +107,38 @@ def generate_embedding(image_data) :
     return embedding
     
 
-def insert_embedding(fits_coll, file_path, embedding):
+def insert_embedding(fits_coll, file_path, header, embedding):
 
-    fits_coll.insert([[file_path], [embedding]])
+    image_width = header['NAXIS1']
+    image_height = header['NAXIS2']
+    image_utz = header['UT-OBS']
+    object_name = header['OBJECT']
+    object_ra = header['RA']
+    object_dec = header['DEC']
+    object_alt = header['TELALT']
+    object_az = header['TELAZ']
+    camera_focus = header['CAMFOCUS']
+    local_temp = header['TELTEMP']
+    local_lat = header['LATITUDE']
+    local_long = header['LONGITUD']
+    local_weather = header['WEATHER']
+
+    fits_coll.insert([  [file_path], 
+                        [embedding],
+                        [image_width], 
+                        [image_height], 
+                        [image_utz], 
+                        [object_name], 
+                        [object_ra], 
+                        [object_dec], 
+                        [object_alt],
+                        [object_az], 
+                        [camera_focus], 
+                        [local_temp], 
+                        [local_lat], 
+                        [local_long], 
+                        [local_weather]   
+                      ])
     fits_coll.load()
 
 def initialize_collection():
@@ -103,9 +146,9 @@ def initialize_collection():
     file_paths = glob.glob("./images/m31*.FITS")
     for image_file in sorted(file_paths):
         print("Inserting file: ", image_file)
-        image_data = load_fits_file(image_file)
+        image_header, image_data = load_fits_file(image_file)
         embedding_vector = generate_embedding(image_data)
-        insert_embedding(fits_coll, image_file, embedding_vector)
+        insert_embedding(fits_coll, image_file, image_header, embedding_vector)
     return fits_coll
 
 #----------------------------#
