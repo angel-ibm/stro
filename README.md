@@ -2,7 +2,7 @@
 
 ![Top](./images/cover1.png "watsonxdata")
 
-We all know that beautiful pictures often captivate us, though this beauty may sometimes be deceiving. For not making it personal, take, for example, the night sky: a source of inspiration and wonder beneath the moonlight, yet it may conceal unseen dangers.
+We all know that beautiful pictures often captivate us. However beauty may sometimes be deceiving. Let's take, for example, the night sky: a source of inspiration and wonder beneath the moonlight, yet it may conceal unseen dangers hidden in anomalies that we may be able to detect.
 
 ## A big family of use cases
 
@@ -64,7 +64,7 @@ Flyeye Observatory
         </div>
         <div style="height: 125px"><p style="font-size: 14px">
 <!-- Description -->
-As part of the global effort to spot risky celestial objects such as asteroids and comets, ESA is developing a network of automated telescopes for nightly sky surveys. The ‘Flyeye-1’ telescope is the first in a future network that would scan the entire sky and automatically identify possible new near-Earth objects (NEOs) for follow up and later checking by human astronomers.
+As part of the global effort to spot risky celestial objects such as asteroids and comets, ESA is developing a network of automated telescopes for nightly sky surveys. The Flyeye-1 telescope is the first in a future network that would scan the entire sky and automatically identify possible new near-Earth objects (NEOs) for follow up and later checking by human astronomers.
         </div>
         <div style="height: 25px"><p style="font-size: 12px; text-align: right">
 <!-- Duration -->
@@ -92,7 +92,7 @@ Consider a project that requires:
 - Event generation and data transport
 - Embedding generation and similarity search
 
-Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/).
+Milvus, Kafka, Presto, Iceberg, Python are good technology candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/).
 
 ![watsonxdata](./images/watsonxdata.png "watsonxdata")
 
@@ -112,13 +112,22 @@ For the moment, let's remain more modest in our goals and assume that we have an
 
 ![mym31](./images/mym31.png "mym31")
 
-To get the pictures, we attach a **deep space camera** to the telescope and connect the camera to small computer that acts as an **event generator**. Every time a picture is captured, the event lands onto our demo system bringing the graphic and metadata content. This looks like something like this:
+To get pictures, we attach a **deep space camera** to the telescope and connect the camera to small computer that acts as an **event generator**. Every time a picture is captured, the event lands onto our demo system bringing the graphic and metadata content. This looks like something like this:
 
 ![Conn](./images/connections.png "Conn")
 
 Obviuosly, there are many cables that I am not showing in the picture and a few more components necessary to get a decent picture. Anyway, if you are curious take a look at some of them:
 
 ![Gear](./images/gear.png "Gear")
+
+### 2. Content transport and storage
+
+We need to store for some time the events until we are sure that can be disposed.
+
+### 3. Similarity search and alert generation
+
+Metadata help us to perform sensible searchs 
+
 
 By the way: this schema can be generalized immediately to another use cases: think of **a drone looking for structural defects** in the surface of a bridge, or a **camera detecting imperfections** in  textile fabrics...  
 
