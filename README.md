@@ -96,9 +96,8 @@ Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requir
 
 ## The story
 
- Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast.
 
-<img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:50%; float:left; margin-right:10px;">
+| <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:50%; float:left; margin-right:10px;"> | Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. | 
 
  Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast.
 
