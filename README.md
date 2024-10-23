@@ -95,11 +95,11 @@ Consider a project that requires:
 Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/). This environment extensively leverages the commercial product [watsonx.data](https://www.ibm.com/products/watsonx-data) which combines many technologies typically present in projects dedicated to analytics and artifical intelligence. Take a look at the [watsonx.data Solution Brief](https://www.ibm.com/downloads/cas/4Z1YXEBO) for more details on this product.
 
 ## The story
-<table>
+<table style="border-collapse: collapse; border: none;">
   <tbody>
     <tr>
-      <td style="width: 20%;">Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. </td>
-      <td style="width: 40%;"> <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:100%"> </td>
+      <td style="width: 50%; border: none;">Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. </td>
+      <td style="width: 50%; border: none;"> <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:100%"> </td>
     </tr>
   </tbody>
 </table>
