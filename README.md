@@ -112,7 +112,17 @@ For the moment, let's remain more modest in our goals and assume that we have an
 
 ![mym31](./images/mym31.png "mym31")
 
-To get the pictures, we attach a **deep space camera** to the telescope and connect the camera to small computer that acts as an **event generator**. Every time a picture is captured, the event lands onto our demo system bringing the graphic and metadata content.
+To get the pictures, we attach a **deep space camera** to the telescope and connect the camera to small computer that acts as an **event generator**. Every time a picture is captured, the event lands onto our demo system bringing the graphic and metadata content. This looks like something like this:
+
+![Conn](./images/connections.png "Conn")
+
+Obviuosly, there are many cables that I am not showing in the picture and a few more components necessary to get a decent picture. Anyway, if you are curious take a look at some of them:
 
 ![Gear](./images/gear.png "Gear")
+
+By the way: this schema can be generalized immediately to another use cases: think of **a drone looking for structural defects** in the surface of a bridge, or a **camera detecting imperfections in any textile fabric**... 
+
+
+
+
 
