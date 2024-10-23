@@ -106,13 +106,13 @@ Professional and amateur astronomers often compare their observations (i.e: thei
 
 When astronomers encounter an unidentified object, it's considered an anomaly. They continue to observe and calculate its trajectory to determine whether it poses any concern. These anomalies can range from insignificant issues like space debris, camera malfunctions or atmospheric interference to potentially significant discoveries such as previously unnoticed asteroids or comets. One example of a surveillance system used for this purpose is [Scout: NEOCP Hazard Assessment](https://cneos.jpl.nasa.gov/scout/intro.html).
 
-### Content generation: graphics and metadata
+### 1. Content generation: graphics and metadata
 
-For the moment, let's remain more modest in our goals and assume that we have an amateur telescope pointing to the sky. The target for tonight is the [Andromeda Galaxy, aka. M31](https://en.wikipedia.org/wiki/Andromeda_Galaxy).
+For the moment, let's remain more modest in our goals and assume that we have an amateur telescope pointing to the sky. The target for tonight is the [Andromeda Galaxy, aka. M31](https://en.wikipedia.org/wiki/Andromeda_Galaxy). At the naked eye, this object is six times bigger than the moon but it is really faint. That is: if you have a dark sky and if your eyes work well you may guess a faint, grey ellipse. Simple binoculars or a **wide field telescope** will give you a quite different perspective. Something like this:
 
 ![mym31](./images/mym31.png "mym31")
 
-
-
+To get the pictures, we attach a **deep space camera** to the telescope and connect the camera to small computer that acts as an **event generator**. Every time a picture is captured, the event lands onto our demo system bringing the graphic and metadata content.
 
 ![Gear](./images/gear.png "Gear")
+
