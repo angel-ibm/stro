@@ -15,10 +15,9 @@ There are numerous examples where anomaly detection is critical, not only for a 
 - Assisted disease diagnosis and alike in life sciences
 - ...and many more, such as in agriculture, surveillance, and beyond.
 
-
 For this demo, the use case we will present is of monumental importance. Indeed, the threat it addesses could compromise the very existence of humanity: the detection of asteroids or near-Earth objects with potentially devastating consequances if a collision might occur.
 
-Don't think about science fiction now, this is no kidding at all. In fact,  significant resources have been, and continue to be, invested in identifying potentially hazardous objects in space. Projects like the [NEO Surveyor ](https://science.nasa.gov/mission/neo-surveyor/), the [Space Mision DART](https://science.nasa.gov/mission/dart/) , and the [Flyeye project](https://www.esa.int/ESA_Multimedia/Images/2016/10/Flyeye_telescope) are dedicated to detecting these threats and protecting the Eartht from potential risks.
+Don't think about science fiction now, this is no kidding at all. In fact,  significant resources have been, and continue to be, invested in identifying potentially hazardous objects in space. Projects like the [NEO Surveyor](https://science.nasa.gov/mission/neo-surveyor/), the [Space Mision DART](https://science.nasa.gov/mission/dart/) , and the [Flyeye project](https://www.esa.int/ESA_Multimedia/Images/2016/10/Flyeye_telescope) are dedicated to detecting these threats and protecting the Eartht from potential risks.
 
 <!-- Row 0 -->
 <div style="font-family: 'IBM Plex Sans';">
@@ -33,17 +32,17 @@ NEO Surveyor Project
 Near-Earth Object (NEO) Surveyor is the first space telescope specifically designed to hunt asteroids and comets that may be potential hazards to Earth.
         </div>
         <div style="height: 25px"><p style="font-size: 12px; text-align: right">
-<!-- Duration -->            
+<!-- Duration -->
         </div>
         <div style="height: 10px"><p style="font-size: 12px; text-align: right">
 <!-- URL -->
 <a href="https://science.nasa.gov/mission/neo-surveyor/">
-        <img style="display: inline-block;"src="./images/arrowblue.png"></a>          
-        </div>        
-    </td>    
+        <img style="display: inline-block;"src="./images/arrowblue.png"></a>
+        </div>
+    </td>
     <td style="padding: 15px; text-align:left; vertical-align: text-top; background-color:#F7F7F7; width: 300px; height:250px">
         <div style="height: 75px"><p style="font-size: 24px">
-<!-- Title -->            
+<!-- Title -->
 Space Mission DART
 </div>
         <div style="height: 125px"><p style="font-size: 14px">
@@ -53,10 +52,10 @@ DART (Double Asteroid Redirection Test ) was the first-ever mission dedicated to
         <div style="height: 25px"><p style="font-size: 12px; text-align: right">
         </div>  
         <div style="height: 10px"><p style="font-size: 12px; text-align: right">
-<!-- URL -->            
+<!-- URL -->
 <a href="https://science.nasa.gov/mission/dart/">
-                 <img style="display: inline-block;"src="./images/arrowblue.png"></a>            
-        </div>            
+                 <img style="display: inline-block;"src="./images/arrowblue.png"></a>
+        </div>
     </td>
     <td style="padding: 15px; text-align:left; vertical-align: text-top; background-color:#F7F7F7; width: 300px; height: 250px;">
         <div style="height: 75px"><p style="font-size: 24px">
@@ -68,15 +67,15 @@ Flyeye Observatory
 As part of the global effort to spot risky celestial objects such as asteroids and comets, ESA is developing a network of automated telescopes for nightly sky surveys. The ‘Flyeye-1’ telescope is the first in a future network that would scan the entire sky and automatically identify possible new near-Earth objects (NEOs) for follow up and later checking by human astronomers.
         </div>
         <div style="height: 25px"><p style="font-size: 12px; text-align: right">
-<!-- Duration -->            
+<!-- Duration -->
         </div>
         <div style="height: 10px"><p style="font-size: 12px; text-align: right">
 <!-- URL -->
 <a href="https://www.esa.int/ESA_Multimedia/Images/2017/02/Flyeye_Observatory">
-        <img style="display: inline-block;"src="./images/arrowblue.png"></a>          
-        </div>        
+        <img style="display: inline-block;"src="./images/arrowblue.png"></a>
+        </div>
     </td>
-      
+
 </table>
 </div>  
 
@@ -84,7 +83,7 @@ As part of the global effort to spot risky celestial objects such as asteroids a
 
 ## Objectives
 
-The motivation of the demo is to illustrate how a group of technologies can be easily integrated  to extract valuable insights from the combination of graphical content and its metadata (with indepence of the use case or the industry area). It is not intended to represent an actual implementation of near-Earth object detection. No, astronomers do not operate exactly in this way. However, this is not an obstacle to learn how to how to effectively combine multiple technological components to achieve useful outcomes. 
+The motivation of the demo is to illustrate how a group of technologies can be easily integrated  to extract valuable insights from the combination of graphical content and its metadata (with indepence of the use case or the industry area). It is not intended to represent an actual implementation of near-Earth object detection. No, astronomers do not operate exactly in this way. However, this is not an obstacle to learn how to how to effectively combine multiple technological components to achieve useful outcomes.
 
 Consider a project that requires:
 
@@ -96,6 +95,8 @@ Consider a project that requires:
 Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/). This environment extensively leverages the commercial product [watsonx.data](https://www.ibm.com/products/watsonx-data) which combines many technologies typically present in projects dedicated to analytics and artifical intelligence. Take a look at the [watsonx.data Solution Brief](https://www.ibm.com/downloads/cas/4Z1YXEBO) for more details on this product.
 
 ## The story
+
+ Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast.
 
 <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:50%; float:left; margin-right:10px;">
 
