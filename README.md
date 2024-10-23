@@ -100,8 +100,16 @@ Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requir
 |-|-|
 | Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. When astronomers encounter an unidentified object, it's considered an anomaly. They continue to observe and calculate its trajectory to determine whether it poses any concern. These anomalies can range from insignificant issues like space debris, camera malfunctions or atmospheric interference to potentially significant discoveries such as previously unnoticed asteroids or comets. One example of a surveillance system used for this purpose is [Scout: NEOCP Hazard Assessment](https://cneos.jpl.nasa.gov/scout/intro.html). | ![Ergenzingen](./images/ergenzingen.jpg "ergenzingen") |
 
-Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. 
 
-
+<table>
+  <tbody>
+    <tr>
+      <td style="width: 20%;">Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. </td>
+      <td style="width: 40%;"> <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:90%">
+ </td>
+    </tr>
+  </tbody>
+</table>
+ When astronomers encounter an unidentified object, it's considered an anomaly. They continue to observe and calculate its trajectory to determine whether it poses any concern. These anomalies can range from insignificant issues like space debris, camera malfunctions or atmospheric interference to potentially significant discoveries such as previously unnoticed asteroids or comets. One example of a surveillance system used for this purpose is [Scout: NEOCP Hazard Assessment](https://cneos.jpl.nasa.gov/scout/intro.html).
 
 
