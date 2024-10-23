@@ -15,13 +15,13 @@ There are numerous examples where anomaly detection is critical, not only for a 
 - Assisted disease diagnosis and alike in life sciences
 - ...and many more, such as in agriculture, surveillance, and beyond.
 
-For this demo, the use case we will present is of monumental importance. Indeed, the threat it addesses could compromise the very existence of humanity: the detection of asteroids or near-Earth objects with potentially devastating consequances if a collision might occur.
+For this demo, the use case we will present is of monumental importance. Indeed, the threat it addesses could compromise the very existence of humanity: the detection of asteroids or near-Earth objects with potentially devastating consequences if a collision might occur.
 
 Don't think about science fiction now, this is no kidding at all. In fact,  significant resources have been, and continue to be, invested in identifying potentially hazardous objects in space. Projects like the [NEO Surveyor](https://science.nasa.gov/mission/neo-surveyor/), the [Space Mision DART](https://science.nasa.gov/mission/dart/) , and the [Flyeye project](https://www.esa.int/ESA_Multimedia/Images/2016/10/Flyeye_telescope) are dedicated to detecting these threats and protecting the Eartht from potential risks.
 
 <!-- Row 0 -->
-<div style="font-family: 'IBM Plex Sans';">
-<table style="float:left; width: 620px; height: 235px; border-spacing: 10px; border-collapse: separate; table-layout: fixed">
+<div>
+<table style="float:left;  border-spacing: 10px; border-collapse: separate; table-layout: fixed">
     <td style="padding: 15px; text-align:left; vertical-align: text-top; background-color:#F7F7F7; width: 300px; height: 250px;">
         <div style="height: 75px"><p style="font-size: 24px">
 <!-- Title -->
@@ -47,7 +47,7 @@ Space Mission DART
 </div>
         <div style="height: 125px"><p style="font-size: 14px">
 <!-- Abstract -->
-DART (Double Asteroid Redirection Test ) was the first-ever mission dedicated to investigating and demonstrating one method of asteroid deflection by changing an asteroid’s motion in space through kinetic impact.
+DART (Double Asteroid Redirection Test) was the first-ever mission dedicated to investigating and demonstrating one method of asteroid deflection by changing an asteroid’s motion in space through kinetic impact.
         </div>
         <div style="height: 25px"><p style="font-size: 12px; text-align: right">
         </div>  
@@ -120,7 +120,7 @@ Obviuosly, there are many cables that I am not showing in the picture and a few 
 
 ![Gear](./images/gear.png "Gear")
 
-By the way: this schema can be generalized immediately to another use cases: think of **a drone looking for structural defects** in the surface of a bridge, or a **camera detecting imperfections in any textile fabric**... 
+By the way: this schema can be generalized immediately to another use cases: think of **a drone looking for structural defects** in the surface of a bridge, or a **camera detecting imperfections** in  textile fabrics...  
 
 
 
