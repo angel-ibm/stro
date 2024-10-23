@@ -98,8 +98,8 @@ Milvus, Kafka, Presto, Iceberg, Python are good candidates to address the requir
 <table style="border-collapse: collapse; border: none;">
   <tbody>
     <tr>
-      <td style="width: 50%; border: none;">Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. </td>
-      <td style="width: 50%; border: none;"> <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:200%"> </td>
+      <td style="width: 30%; border: none;">Professional and amateur astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about). These systems house billions of entries and petabytes of data. Indeed, the universe is vast. </td>
+      <td style="width: 70%; border: none;"> <img src="./images/ergenzingen.jpg" alt="Ergenzingen" title="ergenzingen" style="width:100%"> </td>
     </tr>
   </tbody>
 </table>
