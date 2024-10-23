@@ -101,3 +101,5 @@ Professional and amateur astronomers often compare their observations (i.e: thei
 ![Ergenzingen](./images/ergenzingen.png "ergenzingen")
 
 When astronomers encounter an unidentified object, it's considered an anomaly. They continue to observe and calculate its trajectory to determine whether it poses any concern. These anomalies can range from insignificant issues like space debris, camera malfunctions or atmospheric interference to potentially significant discoveries such as previously unnoticed asteroids or comets. One example of a surveillance system used for this purpose is [Scout: NEOCP Hazard Assessment](https://cneos.jpl.nasa.gov/scout/intro.html).
+
+![Gear](./images/gear.png "Gear")
