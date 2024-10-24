@@ -157,9 +157,9 @@ At this stage, two actions can be taken:
 - **Similarity Search**: Immediately check if the received image matches any existing image in the private repository. This is done by generating an embedding from the event and comparing it with those in the pre-existing repository. This has been populated when we set up the demo as indicated in the previous section.
 - **Event Archiving**: Store the event in watsonx.data. Beyond anomaly detection, there are other potential uses for the captured data, making it valuable to archive the telescope's observations in a persistent storage and not leaving it in Kafka. However, note that the archiving is optional. The event can be disposed after the similarity check.
 
+If you are interested in the search method performed by Milvus, we can say that we use Euclidean distance metric (L2) in this demo. This means that the search will calculate the L2 distance (or squared Euclidean distance) between the query vector and the stored vectors in the collection. In fact, that matches perfectly the way we generated the embeddings during the population of the private repository. To simplify things: if a search yields a zero-distance between two embeddings, it means that the corresponding pictures are identical (or almost identical). It is up to us to decide the distance threshold to consider a picture as "normal" or "anomaly".
+
 Metadata is essential for conducting more efficient searches, as it allows for more targeted and sensible queries instead of relying on brute-force scanning of all images. By using metadata, it is possible to exclude images that are unsuitable for comparison due to various conditions (a different zone in the sky, uncompatible exposures, etc.), thereby improving the accuracy and speed of the search process. For the demo, the metadata has been redundantly added to the Milvus collection containing the embeddings in order to make it easier the experimentation.
-
-
 
 Note that this scenario can easily be generalized to other use cases. For example, consider a drone inspecting a bridge for **structural defects** or a camera identifying **imperfections in textile fabrics**, among many other potential applications.
 
