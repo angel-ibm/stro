@@ -2,7 +2,7 @@
 
 ![Top](./images/cover1.png "watsonxdata")
 
-We all know that beautiful pictures often captivate us. However beauty may sometimes be deceiving. Let's take, for example, the night sky: a source of inspiration and wonder beneath the moonlight, yet it may conceal unseen dangers hidden in anomalies that we may be able to detect.
+Beautiful pictures often grab our attention. Take the night sky, for example: under the moonlight, it evokes wonders and romances.... Well, not always because behind its calm appearance, it might be hiding unseen threats. 
 
 ## A big family of use cases
 
