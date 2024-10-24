@@ -129,6 +129,10 @@ Obviuosly, there are many cables that I am not showing in the picture and a few 
 
 ![Gear](./images/gear.png "Gear")
 
+Astronomical instruments, even for amateurs, do not usually generate pictures in a format that the common public likes (it is the same with industrial sensors, right?). A popular picture format in astronomy is called [FITS](https://en.wikipedia.org/wiki/FITS) which is optimized for the processing work that is needed in astronomy. For this demo, the good thing about this format is that it contains plenty of metadata embedded in the picture file.
+
+![fitsheader](./images/fitsheader.png "fitsheader")
+
 ### 2. Content transport and storage
 
 
