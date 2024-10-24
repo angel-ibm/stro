@@ -90,7 +90,7 @@ Consider a project that requires:
 - Unstructured mass storage in a Lakehouse
 - Extraction and management of content metadata
 - Event generation and data transport
-- Embedding generation and similarity search
+- Embedding generation and similarity search using a vector database
 
 Milvus, Kafka, Presto, Iceberg, Python are good technology candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/).
 
@@ -125,7 +125,7 @@ In short, we can say that the embeddings are vectorized representations of the i
 - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
 - finally, we have an embedding which is inserted into a collection in Milvus
 
-The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...).The former is what some people would call "unstructured" information and the latter have a traditional structure can be stored in our well-known relational tables.
+The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...). The embeddings (vectors) is what some people would call "unstructured" information and the metadata  have a traditional structure can be stored in our well-known relational tables.
 
 ### 2. Content generation: graphics and metadata
 
