@@ -119,7 +119,12 @@ The demo illustrates how to create a **private image repository in a Data Lakeho
 
 ![init](./images/init.png "init")
 
-In short, we can say that the embeddings are vectorized representations of the image, will we will use for comparing pictures and identifying strange things, and the metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...).The former is what some people would call "unstructured" information and the latter have a traditional structure can be stored in our well-known relational tables.
+In short, we can say that the embeddings are vectorized representations of the image, which we will use for comparing pictures and identifying strange things. If you are interested in the details:
+    - first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector.
+    - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
+    - finally, we have an embedding which is inserted into a collection in Milvus
+
+The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...).The former is what some people would call "unstructured" information and the latter have a traditional structure can be stored in our well-known relational tables.
 
 ### 2. Content generation: graphics and metadata
 
@@ -149,10 +154,12 @@ As pictures are not be huge, that makes it possible for Kafka to be the means of
 
 At this stage, two actions can be taken:
 
-- **Similarity Search**: Immediately check if the received image matches any existing image in the private repository. This is done by generating an embedding from the event and comparing it with those in the pre-existing repository. In the demo, this has been populated when we set it up.
+- **Similarity Search**: Immediately check if the received image matches any existing image in the private repository. This is done by generating an embedding from the event and comparing it with those in the pre-existing repository. This has been populated when we set up the demo as indicated in the previous section.
 - **Event Archiving**: Store the event in watsonx.data. Beyond anomaly detection, there are other potential uses for the captured data, making it valuable to archive the telescope's observations in a persistent storage and not leaving it in Kafka. However, note that the archiving is optional. The event can be disposed after the similarity check.
 
 Metadata is essential for conducting more efficient searches, as it allows for more targeted and sensible queries instead of relying on brute-force scanning of all images. By using metadata, it is possible to exclude images that are unsuitable for comparison due to various conditions (a different zone in the sky, uncompatible exposures, etc.), thereby improving the accuracy and speed of the search process. For the demo, the metadata has been redundantly added to the Milvus collection containing the embeddings in order to make it easier the experimentation.
+
+
 
 Note that this scenario can easily be generalized to other use cases. For example, consider a drone inspecting a bridge for **structural defects** or a camera identifying **imperfections in textile fabrics**, among many other potential applications.
 
