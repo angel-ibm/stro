@@ -110,10 +110,11 @@ If they encounter an unidentified object, that is considered an **anomaly**. The
   <img src="./images/asteroid.gif" />
 </p>
 
-
-In order to assess the risks of an object, astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about).  These systems house billions of entries and petabytes of data. Indeed, the universe is vast. The demo illustrates how to create a private image repository in a Data Lakehouse, which is probably what a company would do with its confidential material. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
+In order to assess the risks of an object, astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about).  These systems house billions of entries and petabytes of data. Indeed, the universe is vast. The demo illustrates how to create a **private image repository in a Data Lakehouse**, which is probably what a company would do with its confidential material. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
 
 ![init](./images/init.png "init")
+
+In short, we can say that the embeddings are vectorized representations of the image, will we will use for comparing pictures and identifying strange things, and the metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...).The former is what some people would call "unstructured" information and the latter have a traditional structure can be stored in our well-known relational tables.
 
 ### 1. Content generation: graphics and metadata
 
@@ -129,21 +130,18 @@ Obviuosly, there are many cables that I am not showing in the picture and a few 
 
 ![Gear](./images/gear.png "Gear")
 
-Astronomical instruments, even for amateurs, do not usually generate pictures in a format that the common public likes (it is the same with industrial sensors, right?). A popular picture format in astronomy is called [FITS](https://en.wikipedia.org/wiki/FITS) which is optimized for the processing work that is needed in astronomy. For this demo, the good thing about this format is that it contains plenty of metadata embedded in the picture file.
+Astronomical instruments, even for amateurs, do not usually generate pictures in a format that the common public likes (it is the same with industrial sensors, right?). A popular picture format in astronomy is called [FITS](https://en.wikipedia.org/wiki/FITS) which is optimized for the processing work that is needed in astronomy. For this demo, the good thing about this format is that it contains plenty of metadata embedded in the picture file. Look at the right part of the following picture:
 
 ![fitsheader](./images/fitsheader.png "fitsheader")
 
-### 2. Content transport and storage
-
-
+### 2. Content transport, storage and similarity search
 
 We need to store for some time the events until we are sure that can be disposed.
-
-### 3. Similarity search and alert generation
 
 Metadata help us to perform sensible searchs  
 
 
+![run](./images/run.png "run")
 
 
 
