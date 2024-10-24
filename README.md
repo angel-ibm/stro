@@ -2,7 +2,7 @@
 
 ![Top](./images/cover1.png "watsonxdata")
 
-Beautiful pictures often grab our attention. Take the night sky, for example: under the moonlight, it evokes wonders and romances.... Well, not always because behind its calm appearance, it might be hiding unseen threats. 
+Beautiful pictures often catch our eye. Take the night sky, for example: under the moonlight, it sparks wonder and romance. But not always... because behind its peaceful look, it could be hiding unseen dangers. What if you spot something unusual, potentially heading on a collision course with your area? That’s definitely not romantic and, fortunately, not the normal case. That’s why we call it an "anomaly."
 
 ## A big family of use cases
 
