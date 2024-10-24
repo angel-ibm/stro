@@ -120,9 +120,10 @@ The demo illustrates how to create a **private image repository in a Data Lakeho
 ![init](./images/init.png "init")
 
 In short, we can say that the embeddings are vectorized representations of the image, which we will use for comparing pictures and identifying strange things. If you are interested in the details:
-    - first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector.
-    - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
-    - finally, we have an embedding which is inserted into a collection in Milvus
+
+- first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector.
+- then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
+- finally, we have an embedding which is inserted into a collection in Milvus
 
 The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...).The former is what some people would call "unstructured" information and the latter have a traditional structure can be stored in our well-known relational tables.
 
