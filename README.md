@@ -106,11 +106,9 @@ Professional and amateur astronomers point their instruments to the sky and take
 
 If they encounter an unidentified object, that is considered an **anomaly**. Then, they continue to observe and calculate the trajectory of the offending object to determine whether it poses any concern or not. These anomalies can range from insignificant issues like space debris, camera malfunctions or atmospheric interference to potentially significant discoveries such as previously unnoticed asteroids or comets. One example of a surveillance system used for this purpose is [Scout: NEOCP Hazard Assessment](https://cneos.jpl.nasa.gov/scout/intro.html).
 
-| | |
-|-|-|
-| ![asteroid](./images/asteroid.gif "asteroid") | In order to assess the risks of an object, astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about).  These systems house billions of entries and petabytes of data. Indeed, the universe is vast. |
+![asteroid](./images/asteroid.gif "asteroid")
 
-The demo illustrates how to create a private image repository in a Data Lakehouse, which is probably what a company would do with its confidential material. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
+In order to assess the risks of an object, astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about).  These systems house billions of entries and petabytes of data. Indeed, the universe is vast. The demo illustrates how to create a private image repository in a Data Lakehouse, which is probably what a company would do with its confidential material. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
 
 ![init](./images/init.png "init")
 
