@@ -1,16 +1,15 @@
-# Welcome
+![Top](../images/watsonxdata.png "watsonxdata")
 
-This Demo Script can be found here:
-<https://github.com/angel-ibm/stro>
+# Demo Setup
 
-and it is based on the technologies described on this lab:
+We will provision and prepare a watsonx.data system to tun the demo. The full environment is based on the technologies described on this lab:
 <https://ibm.github.io/watsonx-data-lab/>
 
 ## Prerequisites
 
 You need to have access to the IBM TechZone <https://techzone.ibm.com> and need to provision this demo environment: <https://ibm.github.io/watsonx-data-lab/wxd-reference-techzone/>.
 
-The important sections are:
+While the system is provisioning, just review the important sections to get a first feeling of what is going to happen next:
 
 - Jupyter:
 <https://ibm.github.io/watsonx-data-lab/wxd-jupyter/>
@@ -21,7 +20,7 @@ The important sections are:
 - Milvus:
 <https://ibm.github.io/watsonx-data-lab/wxd-milvus/>
 
-Needless to say, the section dedicated to the watsonx.data UI is also essential to exercise the demo. It is recommended to review it and verify that it works as expected <https://ibm.github.io/watsonx-data-lab/wxd-intro-watsonui/>
+Needless to say, the section dedicated to the watsonx.data UI is  essential to exercise the demo. After the system has been provisioned, it is recommended to review and verify that the GUI works as expected before anything else: <https://ibm.github.io/watsonx-data-lab/wxd-intro-watsonui/>
 
 ## Environment Setup
 
@@ -54,14 +53,12 @@ Needless to say, the section dedicated to the watsonx.data UI is also essential 
 
 ![jupy6](../images/jupy6.png "jupy6")
 
-
 ### 2. Milvus
 
 - Ensure to complete the setup of Milvus in the lab image. See:
 <https://ibm.github.io/watsonx-data-lab/wxd-milvus/>
 
-
-- Verify that Milvus works well by running the notebook `Milvus Example.ipynb`
+- Verify that Milvus works well by running the notebook `Milvus Example.ipynb`. It is not necessary to try the remote connection section of the notebook because we will execute everything locally on the environment we have just provisioned.
 
 ### 3. Kafka
 
@@ -70,11 +67,3 @@ Needless to say, the section dedicated to the watsonx.data UI is also essential 
   
 - Verify Kafka  by running the notebook `Kafka.ipynb`
 
-## Demo Setup
-
-- Open the Jupyter Notebook interface
-- Switch to Jupyter Lab
-- Open a terminal
-- ensure that you are in /notebooks
-- Clone the repository: `git clone https://github.com/angel-ibm/stro.git`
-- Start the notebook `full_demo.ipynb`
