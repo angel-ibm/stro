@@ -166,7 +166,7 @@ For example, if you see this, you will think that is not normal...won't you?
   <img src="./images/anomaly.png" />
 </p>
 
-Indeed, you will see in the demo that this picture has a score (distance) of **more than 150** compared with the repository of the normal pictures of M31.
+Indeed, you will see in the demo that this picture has a score (distance) of **more than 150** compared with the repository of the normal pictures of M31. This is the output at the end of the demo.
 
 <p align="center">
   <img src="./images/result.png" />
