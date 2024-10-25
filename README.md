@@ -168,6 +168,10 @@ For example, if you see this, you will think that is not normal...won't you?
 
 Indeed, you will see in the demo that this picture has a score (distance) of **more than 150** compared with the repository of the normal pictures of M31.
 
+<p align="center">
+  <img src="./images/result.png" />
+</p>
+
 Metadata is essential for conducting more efficient searches, as it allows for more targeted and sensible queries instead of relying on brute-force scanning of all images. By using metadata, it is possible to exclude images that are unsuitable for comparison due to various conditions (a different zone in the sky, uncompatible exposures, etc.), thereby improving the accuracy and speed of the search process. For the demo, the metadata has been redundantly added to the Milvus collection containing the embeddings in order to make it easier the experimentation.
 
 Note that this scenario can easily be generalized to other use cases. For example, consider a drone inspecting a bridge for **structural defects** or a camera identifying **imperfections in textile fabrics**, among many other potential applications.
