@@ -181,6 +181,6 @@ Note that this scenario can easily be generalized to other use cases. For exampl
 Two steps are necessary:
 
 - Preparation: follow the instructions in the [Setup Script](demo/setup_demo.md)
-- Live demonstration: run the cells in the notebook [`run_demo.ipynb`](demo/run_demo.ipynb)
+- Live demonstration: open Jupyter Lab on your provisioned enviroment and run the notebook [`run_demo.ipynb`](demo/run_demo.ipynb)
 
 I hope this demo was both informative and enjoyable for you. The goal was to showcase the capabilities in a clear and engaging way, so that you can apply them in your area of expertise. I’d be delighted to hear any thoughts or suggestions you might have. 
