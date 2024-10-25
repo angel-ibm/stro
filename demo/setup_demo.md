@@ -68,8 +68,18 @@ Run the requirements.sh shell script that installs the additional python package
 
 ### 4. Kafka
 
-- Prepare Kafka follwing the instructions of the lab. See:
-   <https://ibm.github.io/watsonx-data-lab/wxd-kafka/>
+- Prepare the Kafka server by following the instructions of the lab. See: <https://ibm.github.io/watsonx-data-lab/wxd-kafka/>. Run this up to the end. The notebook `Kafka.ipynb` is the best way to perform the initial tasks without typing.
   
-- Verify Kafka  by running the notebook `Kafka.ipynb`
+This preparation is very important, please take your time to run and understand the contents of this section.
 
+Pay special attention at the section where a new topic is registered in Kafka with a customized json file. Learn how to do it because you will need to add a special one for the demo.
+
+- Once you have completed the Kafka section, add a new topic following exactly the same instructions but using this file:
+
+![kafkareg](../images/kafkareg.png "kafkareg")
+
+Then, you will see something like this:
+
+![kafkadef](../images/kafkadef.png "kafkadef")
+
+Just press the red button and congratulations!! You finished the demo setup. You may no run the demo using the notebook [run_demo.ipynb](run_demo.ipynb) locally on the provisioned system.
