@@ -2,7 +2,7 @@
 
 # Demo Setup
 
-We will provision and prepare a watsonx.data system to tun the demo. The full environment is based on the technologies described on this lab:
+We will provision and prepare a watsonx.data system to run the demo. The full environment is based on the technologies described on this lab:
 <https://ibm.github.io/watsonx-data-lab/>
 
 ## Prerequisites
