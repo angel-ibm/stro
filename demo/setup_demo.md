@@ -53,14 +53,20 @@ Needless to say, the section dedicated to the watsonx.data UI is  essential to e
 
 ![jupy6](../images/jupy6.png "jupy6")
 
-### 2. Milvus
+### 2. Python requirements
+
+Run the requirements.sh shell script that installs the additional python packages necessary for the demo
+
+![prereq](../images/prereq.png "prereq")
+
+### 3. Milvus
 
 - Ensure to complete the setup of Milvus in the lab image. See:
 <https://ibm.github.io/watsonx-data-lab/wxd-milvus/>
 
 - Verify that Milvus works well by running the notebook `Milvus Example.ipynb`. It is not necessary to try the remote connection section of the notebook because we will execute everything locally on the environment we have just provisioned.
 
-### 3. Kafka
+### 4. Kafka
 
 - Prepare Kafka follwing the instructions of the lab. See:
    <https://ibm.github.io/watsonx-data-lab/wxd-kafka/>
