@@ -25,6 +25,8 @@ Needless to say, the section dedicated to the watsonx.data UI is also essential 
 
 ## Environment Setup
 
+### 1. Jupyter
+
 - Get Jupyter up and running following the instructions of the lab. See:  
   <https://ibm.github.io/watsonx-data-lab/wxd-jupyter/>
   
@@ -53,11 +55,15 @@ Needless to say, the section dedicated to the watsonx.data UI is also essential 
 ![jupy6](../images/jupy6.png "jupy6")
 
 
+### 2. Milvus
 
 - Ensure to complete the setup of Milvus in the lab image. See:
 <https://ibm.github.io/watsonx-data-lab/wxd-milvus/>
 
+
 - Verify that Milvus works well by running the notebook `Milvus Example.ipynb`
+
+### 3. Kafka
 
 - Prepare Kafka follwing the instructions of the lab. See:
    <https://ibm.github.io/watsonx-data-lab/wxd-kafka/>
