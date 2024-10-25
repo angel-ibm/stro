@@ -82,4 +82,13 @@ Then, you will see something like this:
 
 ![kafkadef](../images/kafkadef.png "kafkadef")
 
-Just press the red button and congratulations!! You finished the demo setup. You may no run the demo using the notebook [run_demo.ipynb](run_demo.ipynb) locally on the provisioned system.
+Just press the red button and congratulations!! You finished the demo setup. 
+
+
+## Run the demo
+
+You may no run the demo using the notebook [run_demo.ipynb](run_demo.ipynb) locally on the provisioned system.
+
+Simply go to the Jupyter Lab, select the demo notebook and run it step by step:
+
+![rundemo](../images/rundemo.png "rundemo")
