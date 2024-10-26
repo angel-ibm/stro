@@ -92,7 +92,7 @@ Consider a project that requires:
 - Event generation and data transport
 - Embedding generation and similarity search using a vector database
 
-Milvus, Kafka, Presto, Iceberg, Python are good technology candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/).
+[Milvus](https://milvus.io/), [Kafka](https://kafka.apache.org/), [Presto](https://prestodb.io/), [Iceberg](https://iceberg.apache.org/), [Python](https://www.python.org/) are good technology candidates to address the requirements mentioned above. They are integrated and demonstrated in the following sections.  The demo is hosted in an environment created by IBMers called [watsonx.data Lab](https://ibm.github.io/watsonx-data-lab/) aimed at educating other IBMers, Business Partners, and anyone with access to the [IBM TechZone](https://ibm.github.io/watsonx-data-lab/).
 
 ![watsonxdata](./images/watsonxdata.png "watsonxdata")
 
