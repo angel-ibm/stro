@@ -1,4 +1,4 @@
-# Anomaly dectection using Milvus, Presto and Kafka on a Lakehouse
+# Anomaly detection using Milvus, Presto and Kafka on a Lakehouse
 
 ![Top](./images/cover1.png "watsonxdata")
 
