@@ -121,8 +121,8 @@ The demo illustrates how to create a **private image repository in a Data Lakeho
 
 In short, we can say that the embeddings are vectorized representations of the image, which we will use for comparing pictures and identifying strange things. If you are interested in the details:
 
-- first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector.
-- then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
+- first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector. Yes: we are disregarding any astronomical insight in the image and treating all bits equal.
+- then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector. The rationale is that some search and comparison techniques require unitary vectors to work well.
 - finally, we have an embedding which is inserted into a collection in Milvus
 
 This is probably the most straightforward way of generating embeddings, but consider that this method does not care about the contents of the image and does not understand meaningful patterns, shapes, or textures. For a fun demo like this, it is perfectly fine, but consider using a model that performs a **feature extraction** in real life. There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
