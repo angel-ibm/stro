@@ -112,16 +112,15 @@ If they encounter an unidentified object, that is considered an **anomaly**. The
 
 In order to assess the risks of an object, astronomers often compare their observations (i.e: their own sky images) with established scientific databases that catalog all known celestial objects. Examples of these databases include [GAIA](https://www.cosmos.esa.int/web/gaia/), the [Horizons System](https://ssd.jpl.nasa.gov/horizons/) and the [Minor Planet Center](http://www.minorplanetcenter.net/about).  These systems house billions of entries and petabytes of data. Indeed, the universe is vast. 
 
-
 ### 1. Data Initialization
 
-The demo illustrates how to create a **private image repository in a Data Lakehouse**, which is probably what a company would do with its confidential material. We will use a bunch of pictures and store them in watsonx.data in two parts: the **graphical embeddings in a vector database** (Milvus) and the **metadata in object store** using Presto and Iceberg. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
+The first step in this demo illustrates how to create a **private image repository in a Data Lakehouse**, which is probably what a company would do with its confidential material. We will use a bunch of pictures and store them in watsonx.data in two parts: the **graphical embeddings in a vector database** (Milvus) and the **metadata in object store** using Presto and Iceberg. The process is depicted in the following picture. Note how we split the raw graphical information and the associated metadata.
 
 ![init](./images/init.png "init")
 
 In short, we can say that the embeddings are vectorized representations of the image, which we will use for comparing pictures and identifying strange things. If you are interested in the details:
 
-- first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector. Yes: we are disregarding any astronomical insight in the image and treating all bits equal.
+- first of all, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector. Yes: we are disregarding any astronomical insight in the image and treating all bits equally.
 - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector. The rationale is that some search and comparison techniques require unitary vectors to work well.
 - finally, we have an embedding which is inserted into a collection in Milvus
 
