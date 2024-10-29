@@ -125,13 +125,12 @@ In short, we can say that the embeddings are vectorized representations of the i
 - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
 - finally, we have an embedding which is inserted into a collection in Milvus
 
-This is probably the most straightforward way of generating embeddings or, to be more technical, of performing the **feature extraction** step. However, there are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
+This is probably the most straightforward way of generating embeddings, but consider that this method does not care about the contents of the image and does not understand meaningful patterns, shapes, or textures. For a fun demo like this, it is perfectly fine, but consider using a model that performs a **feature extraction** in real life. There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
 
 - ResNet: <https://pytorch.org/vision/0.20/models/resnet.html>  
 - VGG: <https://pytorch.org/vision/0.20/models/vgg.html>
 - Inception: <https://pytorch.org/vision/0.20/models/inception.html>
 - EfficientNet: <https://pytorch.org/vision/0.20/models/efficientnet.html>
-
 
 The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...). The embeddings (vectors) is what some people would call "unstructured" information and the metadata  have a traditional structure can be stored in our well-known relational tables.
 
