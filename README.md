@@ -125,14 +125,13 @@ In short, we can say that the embeddings are vectorized representations of the i
 - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector.
 - finally, we have an embedding which is inserted into a collection in Milvus
 
-This is probably the easiest way of generating embeddings or, to be more technical, of performing the **feature extraction** step. However, there are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
+This is probably the most straightforward way of generating embeddings or, to be more technical, of performing the **feature extraction** step. However, there are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
 
-- General purpose Convolutioned Neural Networks (CNNs) 
-  - ResNet (Deep Residual Learning for Image Recognition) see: <https://pytorch.org/vision/0.20/models/resnet.html>  
-  - VGG (Very Deep Convolutional Networks for Large-Scale Image Recognition) see: <https://pytorch.org/vision/0.20/models/vgg.html>
-  - Inception (based on the Rethinking the Inception Architecture for Computer Vision paper) see: <https://pytorch.org/vision/0.20/models/inception.html>
-  - EfficientNet (based on the EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks paper) see: <https://pytorch.org/vision/0.20/models/efficientnet.html>
-- Specialized Astronomy CNNs
+- ResNet: <https://pytorch.org/vision/0.20/models/resnet.html>  
+- VGG: <https://pytorch.org/vision/0.20/models/vgg.html>
+- Inception: <https://pytorch.org/vision/0.20/models/inception.html>
+- EfficientNet: <https://pytorch.org/vision/0.20/models/efficientnet.html>
+
 
 The metadata is tabular information contains additional details about the picture (date, location, weather, exposure, telecope...). The embeddings (vectors) is what some people would call "unstructured" information and the metadata  have a traditional structure can be stored in our well-known relational tables.
 
