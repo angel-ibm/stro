@@ -129,7 +129,7 @@ In short, we can say that the embeddings are vectorized representations of the i
 
 ![ligo](./images/ligo.png "ligo")
 
- However, don't forget the models that perform a sophisticated **feature extraction** . There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
+ However, don't forget the models that perform a sophisticated **feature extraction** instead of (or in addition to) flattening. There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
 
 - ResNet: <https://pytorch.org/vision/0.20/models/resnet.html>  
 - VGG: <https://pytorch.org/vision/0.20/models/vgg.html>
