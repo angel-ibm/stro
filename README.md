@@ -127,10 +127,7 @@ In short, we can say that the embeddings are vectorized representations of the i
 
 [Flattening](https://pysource.com/2022/10/07/flatten-and-dense-layers-computer-vision-with-keras-p-6/) is probably the most straightforward way of generating embeddings, but consider that this method does not care about the contents of the image and does not understand meaningful patterns, shapes or textures. Flatteing pictures is simple but it is a common technique in computer vision that is used, just to mention one example, to flatten sky maps in truly astronomical high-tech projects like [LIGO](https://www.ligo.caltech.edu/) in order to detect [gravitational waves](https://en.wikipedia.org/wiki/Gravitational_wave), which it was a different kind of "anomaly" [Check it out ](https://lscsoft.docs.ligo.org/ligo.skymap/index.html#postprocessing).
 
-
 ![ligo](./images/ligo.png "ligo")
-
-
 
  However, don't forget the models that perform a sophisticated **feature extraction** . There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
 
