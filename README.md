@@ -121,11 +121,11 @@ The first step in this demo illustrates how to create a **private image reposito
 In short, we can say that the embeddings are vectorized representations of the image, which we will use for comparing pictures and identifying strange things. If you are interested in the details of generating grahical embeddings:
 
 - first of all, all pictures are resized to the same resolution. In our case, 116x100 is more than enough to yield good results with a simple model in just a few seconds.
-- in the next step, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector. Yes: we are disregarding any astronomical insight in the image and treating all bits equally.
+- in the next step, the picture is flattened. That is: a 2D dimensional array is converted into a sequence of bits (or pixels,to be more precise) which is already a vector. Yes: we are disregarding any astronomical insight in the image and treating all pixels equally.
 - then, the vector is normalized by dividing it by the L2 norm (Euclidean norm) and so we have a unit vector. The rationale is that some search and comparison techniques require unitary vectors to work well.
-- finally, we have an embedding which is inserted into a collection in Milvus
+- finally, we have an embedding which is inserted into a collection in Milvus. Indeed, we can consider it like a vector whose components (or coordinates) are the intensitiy values of each pixel (normalized)
 
-This is probably the most straightforward way of generating embeddings, but consider that this method does not care about the contents of the image and does not understand meaningful patterns, shapes or textures. For a technology demo like this, it is perfectly fine, but consider using a model that performs a **feature extraction** in real life. There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
+This is probably the most straightforward way of generating embeddings, but consider that this method does not care about the contents of the image and does not understand meaningful patterns, shapes or textures. Flatteing pictures is simple but it is a common technique that is used in truly high-tech projects like [LIGO](https://www.ligo.caltech.edu/) to detect [gravitational waves](https://en.wikipedia.org/wiki/Gravitational_wave). Check it out: <https://lscsoft.docs.ligo.org/ligo.skymap/index.html#postprocessing>. However, don't forget the models that perform a sophisticated **feature extraction** . There are tons of alternatives that need to be explored in each particular use case. Let's mention a few of them:
 
 - ResNet: <https://pytorch.org/vision/0.20/models/resnet.html>  
 - VGG: <https://pytorch.org/vision/0.20/models/vgg.html>
